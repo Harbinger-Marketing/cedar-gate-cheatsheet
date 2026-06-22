@@ -83,7 +83,7 @@ add("chaney", name="David Chaney", company="Legacy & Succession", rep="David Har
 add("gorton", name="John Gorton", company="First National Bank & Trust (FNBT)", rep="Stephen Mitchell",
     team="1", email="JGorton@bankfnbt.com", website="https://www.bankfnbt.com",
     linkedin="https://www.linkedin.com/in/john-gorton-0208b084/", overnight=True, client=True, badge="CONFIRMED",
-    role="Cabin 3", note="Harbinger client (WON ~$372K). CEO of 130-yr community bank. Cabin 3 (2nd room TBD).")
+    role="Cabin 3", note="Harbinger client (WON ~$372K). CEO of 130-yr community bank. Bringing Ed Stanton (overnight, Cabin 3) + Brad Wilkerson & Jerry Bethea (Friday shoot).")
 add("hoey", name="Philip Hoey (+ Matt Smith)", company="Hoey Construction", rep="David Harbin",
     team="2", email="philh@hoeyconstruction.com", website="https://hoeyconstruction.com",
     linkedin="https://www.linkedin.com/in/philip-hoey-27867629/",
@@ -106,6 +106,12 @@ add("dbaker", name="Dean Baker", company="Midtown Construction", rep="Elijah Lee
     overnight=True, badge="CONFIRMED", note="Came with GES/Scott Munday; construction = core ICP. Confirm exact firm/role.")
 add("msmith", name="Matt Smith", company="Company TBD (reps another firm)", rep="Troy Williams", role="Cabin 5 (w/ Phil Hoey)",
     overnight=True, badge="CONFIRMED", note="Phil Hoey's +1 but represents a DIFFERENT company - not in Asana/Evite. Get company + email from Hoey/inviter.")
+add("stanton", name="Ed Stanton", company="Company TBD (FNBT guest)", rep="Stephen Mitchell", role="Cabin 3 (w/ John Gorton)",
+    overnight=True, badge="CONFIRMED", note="John Gorton's (FNBT) overnight guest - fills Cabin 3 Room 2. Company not yet identified; ask John/Anna.")
+add("wilkerson", name="Brad Wilkerson", company="Guest of FNBT (John Gorton)", rep="Stephen Mitchell",
+    badge="CONFIRMED", note="John Gorton's (FNBT) Friday-shoot guest (coordinated via Anna).")
+add("bethea", name="Jerry Bethea", company="Guest of FNBT (John Gorton)", rep="Stephen Mitchell",
+    badge="CONFIRMED", note="John Gorton's (FNBT) Friday-shoot guest (coordinated via Anna).")
  
 # SHOOT-DAY confirmed (not overnight)
 add("brad", name="Brad Wittrock / Tiffany Jones", company="TerraStar Inc.", rep="Graham Turner",
@@ -243,14 +249,15 @@ add("hazen", name="Julie Hazen", company="A&A Trucking", rep="Troy Williams",
     email="jhazen@aa-trucking.com", phone="(405) 323-2985", website="https://www.aa-trucking.com",
     badge="UNCONFIRMED", note="Lane's prospect (~2 guests). Marked attending in the tracker but Evite RSVP not yet confirmed; not yet slotted to a team.")
  
-OVERNIGHT_KEYS=["munday","walls","gorton","hoey","chaney","miller","brock","dbaker","msmith"]
+OVERNIGHT_KEYS=["munday","walls","gorton","stanton","hoey","chaney","miller","brock","dbaker","msmith"]
  
 CONFIRMED_KEYS=["munday","redsch","walls","kirk","carter","avery","pfeil","miranda","priddy","erik","tj","alvin",
  "brad","doug","gorton","horgan","urbanc","boyd","chaney","ortiz","hoey","colt","miller","brock",
- "denny","garrett","strider","robber","bradford","ward","zamora","dbaker","msmith"]
+ "denny","garrett","strider","robber","bradford","ward","zamora","dbaker","msmith",
+ "stanton","wilkerson","bethea"]
 UNCONF_KEYS=["toms","hayden","morrow","sean","kates","cook","buster","page","jessup","hazen","amilian","tara","tamara","barnes","oquinn","moore","lisa"]
  
-REP_ORDER=["Current Partner","Elijah Lee","Stephen Mitchell","Troy Williams","David Harbin"]
+REP_ORDER=["Current Partner","Elijah Lee","Stephen Mitchell","Troy Williams","David Harbin","Lane McPherson","Graham Turner"]
  
 # ---- Assignments = previous (post-meeting) list + Michael's update ----
 # Base data already reflects the meeting moves (Shawn Priddy->Elijah, Hights->Troy, Munday/Schulze->Elijah).
@@ -288,6 +295,20 @@ for _k in CURRENT_PARTNERS:
         if P[_k].get("role")=="OWNER (not shooting)":
             P[_k].pop("role",None)
  
+# ---- Unconfirmed stay with their ORIGINAL inviter (Lane or Graham) until they RSVP yes ----
+# Only after confirming do they move to their host (Troy / Elijah / Stephen).
+UNCONF_INVITER={
+ "toms":"Lane McPherson","hayden":"Lane McPherson","morrow":"Lane McPherson","sean":"Lane McPherson",
+ "kates":"Lane McPherson","cook":"Lane McPherson","buster":"Lane McPherson","page":"Lane McPherson",
+ "jessup":"Lane McPherson","hazen":"Lane McPherson",
+ "amilian":"Graham Turner","tara":"Graham Turner","tamara":"Graham Turner","barnes":"Graham Turner",
+ "oquinn":"Graham Turner","moore":"Graham Turner","lisa":"Graham Turner",
+}
+for _k,_r in UNCONF_INVITER.items():
+    if _k in P:
+        P[_k]["rep"]=_r
+        P[_k].pop("role",None)
+ 
 # ---- Best-fit rating (1-5) vs Harbinger ICP (OK trades/construction/home-services/mfg/energy-svcs) ----
 # Grounded in Harbinger's 271-client base: core trades + construction score highest; existing clients = 5;
 # enterprises / banks-as-buyers / nonprofits / associations / unknown = low.
@@ -295,7 +316,7 @@ FITSCORE={
  "munday":5,"redsch":5,"walls":5,"kirk":4,"carter":4,"avery":3,"pfeil":2,"miranda":2,"priddy":3,
  "erik":4,"tj":4,"brad":4,"alvin":4,"doug":4,"denny":5,"garrett":5,"gorton":5,"horgan":4,"urbanc":2,
  "boyd":2,"strider":2,"zamora":2,"ward":2,"bradford":3,"robber":3,"colt":4,"miller":3,"brock":3,
- "chaney":5,"ortiz":5,"hoey":5,"dbaker":4,"msmith":3,
+ "chaney":5,"ortiz":5,"hoey":5,"dbaker":4,"msmith":3,"stanton":3,"wilkerson":3,"bethea":3,
  "toms":4,"hayden":4,"morrow":4,"sean":5,"kates":4,"cook":5,"buster":4,"page":4,"jessup":4,
  "amilian":4,"tara":4,"tamara":3,"lisa":4,"barnes":5,"oquinn":4,"moore":2,"hazen":3,
 }
@@ -410,7 +431,7 @@ CABINS_HTML='''
 <div class="grid">
  <div class="card"><div class="nm">Cabin 1 - GES</div><div class="meta" style="margin-top:6px">Room 1: <b>Scott Munday</b> (GES)<br>Room 2: <b>Dean Baker</b> (Midtown Construction)</div></div>
  <div class="card"><div class="nm">Cabin 2 - Echo Contracting</div><div class="meta" style="margin-top:6px">Room 1: <b>Kevin Walls</b><br>Room 2: <b>Eddy</b></div></div>
- <div class="card"><div class="nm">Cabin 3 - FNBT</div><div class="meta" style="margin-top:6px">Room 1: <b>John Gorton</b><br>Room 2: TBD (Anna confirming)</div></div>
+ <div class="card"><div class="nm">Cabin 3 - FNBT</div><div class="meta" style="margin-top:6px">Room 1: <b>John Gorton</b><br>Room 2: <b>Ed Stanton</b> (FNBT guest)</div></div>
  <div class="card"><div class="nm">Cabin 4 - Legacy &amp; Succession</div><div class="meta" style="margin-top:6px">Room 1: <b>David Chaney</b><br>Room 2: <b>Chris Miller</b> (One Atlanta Tax Solutions)</div></div>
  <div class="card"><div class="nm">Cabin 5 - Hoey Construction</div><div class="meta" style="margin-top:6px">Room 1: <b>Phil Hoey</b><br>Room 2: <b>Matt Smith</b></div></div>
  <div class="card"><div class="nm">Main Cabin (dinner venue; 3 rooms)</div><div class="meta" style="margin-top:6px">Room 1: <b>Marc Brockhaus</b> (Dunlap Codding)<br>Room 2: open<br>Room 3: open</div></div>
@@ -632,10 +653,10 @@ h1{{font-size:22px;margin:0 0 2px;color:#1f3a5f}}
 </div>
  
 <div id="sh" class="page">
- <div class="banner"><b>Friday shoot - confirmed attendees</b>, grouped by the Harbinger person who owns the connection (the prior list, with the meeting updates applied). <b>No one is assigned to Graham or Lane.</b> Graham's invitees split between Elijah &amp; Stephen; Lane's go to Troy; the unconnected guests stay with Troy. Troy &amp; Chris don't shoot - Troy greets/owns only; support staff fill open squad seats.</div>
+ <div class="banner"><b>Friday shoot - confirmed attendees</b>, grouped by the Harbinger host who owns the connection. Confirmed guests sit with their host (Troy, Elijah, or Stephen); Graham's and Lane's invitees move to a host only once they RSVP yes - until then they're listed under Graham/Lane in the Unconfirmed section below. Troy &amp; Chris don't shoot - Troy greets/owns only; support staff fill open squad seats.</div>
  {shoot_conf_html}
  <h2 style="font-size:16px;color:#b06a00;margin:26px 0 6px">Still chasing - invited, not yet confirmed</h2>
- <div class="banner" style="background:#fdf6ec;border-color:#f0e0c8">Still being confirmed. Lane's invitees now owned by Troy; Graham's split between Elijah &amp; Stephen.</div>
+ <div class="banner" style="background:#fdf6ec;border-color:#f0e0c8"><b>These still need to be confirmed</b> - listed under the rep who invited them (<b>Lane</b> or <b>Graham</b>) so they know to chase the RSVP. Once a guest confirms yes, they move to their assigned host (Troy, Elijah, or Stephen).</div>
  {shoot_unc_html}
 </div>
  
