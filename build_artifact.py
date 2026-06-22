@@ -496,3 +496,4 @@ import os
 out=os.path.join(os.getcwd(), "cedar_gate_cheatsheet_photos.html" if IMG_MODE else "cedar_gate_cheatsheet.html")
 open(out,"w").write(HTML)
 print("WROTE",out,len(HTML),"bytes")
+
