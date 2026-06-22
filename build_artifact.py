@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 import html, hashlib, sys
 IMG_MODE = ('--photos' in sys.argv)   # standalone version embeds real <img> headshots (renders outside the sandbox)
-
+ 
 REPCOLOR = {
  "Troy Williams":"#1f3a5f","Stephen Mitchell":"#2f6b3d","Elijah Lee":"#5a3e85",
  "Graham Turner":"#1f6b6b","Lane McPherson":"#9c5a1f","David Harbin":"#7a4a2b","Current Partner":"#1a7f4b",
  "Michael Pollard":"#41617f","Mitchell Attaway":"#6b7785","Justin Culbertson":"#8a6d3b","Parrish Walton":"#5e7d8a",
 }
-
+ 
 def initials(name):
     parts=[p for p in name.replace("/"," ").split() if p[:1].isalpha()]
     if not parts: return "?"
     if len(parts)==1: return parts[0][:2].upper()
     return (parts[0][0]+parts[-1][0]).upper()
-
+ 
 def avatar(p):
     col=REPCOLOR.get(p["rep"],"#444")
     ini=initials(p["name"])
@@ -25,7 +25,7 @@ def avatar(p):
     if p.get("photo"):
         return f'<a href="{html.escape(p["photo"])}" target="_blank" title="Open photo" class="avlink">{inner}<span class="cam">photo</span></a>'
     return inner
-
+ 
 def chips(p):
     out=[]
     out.append(f'<span class="chip rep" style="background:{REPCOLOR.get(p["rep"],"#444")}">{html.escape(p["rep"])}</span>')
@@ -34,21 +34,21 @@ def chips(p):
     if p.get("overnight"): out.append('<span class="chip ov">OVERNIGHT</span>')
     if p.get("client"): out.append('<span class="chip cl">CLIENT</span>')
     return "".join(out)
-
+ 
 def links(p):
     L=[]
     if p.get("linkedin"): L.append(f'<a href="{html.escape(p["linkedin"])}" target="_blank">LinkedIn</a>')
     if p.get("website"): L.append(f'<a href="{html.escape(p["website"])}" target="_blank">Website</a>')
     if p.get("photo"): L.append(f'<a href="{html.escape(p["photo"])}" target="_blank">Photo</a>')
     return " &middot; ".join(L) if L else '<span class="muted">no links</span>'
-
+ 
 def contact(p):
     bits=[]
     if p.get("email"): bits.append(html.escape(p["email"]))
     if p.get("phone"): bits.append(html.escape(p["phone"]))
     if p.get("team"): bits.insert(0,f'<b>Team {html.escape(p["team"])}</b>')
     return " &middot; ".join(bits)
-
+ 
 def card(p):
     note=f'<div class="note">{html.escape(p["note"])}</div>' if p.get("note") else ""
     return f'''<div class="card">
@@ -60,12 +60,12 @@ def card(p):
       <div class="links">{links(p)}</div>
       {note}
     </div>'''
-
+ 
 # ---------------- DATA ----------------
 # rep = assigned Harbinger person; role = SHOOTER/OWNER/etc.
 P = {}
 def add(key,**kw): P[key]=kw
-
+ 
 # OVERNIGHT principals (also at shoot)
 add("munday", name="Scott Munday", company="B&H Construction / GES", rep="Elijah Lee", role="Cabin 1 / Dean Baker (Midtown Constr.)",
     team="4", email="scott@bhboring.com", phone="(405) 409-4158", website="https://www.ges.energy",
@@ -106,7 +106,7 @@ add("dbaker", name="Dean Baker", company="Midtown Construction", rep="Elijah Lee
     overnight=True, badge="CONFIRMED", note="Came with GES/Scott Munday; construction = core ICP. Confirm exact firm/role.")
 add("msmith", name="Matt Smith", company="Company TBD (reps another firm)", rep="Troy Williams", role="Cabin 5 (w/ Phil Hoey)",
     overnight=True, badge="CONFIRMED", note="Phil Hoey's +1 but represents a DIFFERENT company - not in Asana/Evite. Get company + email from Hoey/inviter.")
-
+ 
 # SHOOT-DAY confirmed (not overnight)
 add("brad", name="Brad Wittrock / Tiffany Jones", company="TerraStar Inc.", rep="Graham Turner",
     team="4", email="brad.wittrock@terrastarinc.com", phone="405-200-1336", website="https://www.terrastarinc.com",
@@ -192,7 +192,7 @@ add("ortiz", name="David Ortiz", company="Legacy & Succession (Team 2)", rep="Da
     linkedin="https://www.linkedin.com/in/david-ortiz-exit-planner/",
     photo="https://cdn.prod.website-files.com/691111b36cbdfb41187af5f6/6983c12818a1a63e92893ac6_hf_20260129_190025_abb52303-fa7f-4eae-a52d-cc92761dc98b-Photoroom.png",
     client=True, badge="CONFIRMED", note="Harbinger client firm; exit planner.")
-
+ 
 # UNCONFIRMED (chasing) - shoot page only
 add("toms", name="Matthew Toms", company="Bostick Services", rep="Lane McPherson",
     team="4", email="mltoms1212@gmail.com", phone="(405) 657-9296", website="https://bostickservicescorp.com",
@@ -239,16 +239,19 @@ add("moore", name="Mike Moore", company="Mike's Towing", rep="Graham Turner",
 add("lisa", name="Lisa (last name TBD)", company="Preferred Business Systems", rep="Graham Turner",
     email="supply@techbypbs.com", phone="918-252-2199", website="https://techbypbs.com",
     badge="UNCONFIRMED", note="Tulsa office tech / managed IT; owner Mike Wolfinbarger.")
-
+add("hazen", name="Julie Hazen", company="A&A Trucking", rep="Troy Williams",
+    email="jhazen@aa-trucking.com", phone="(405) 323-2985", website="https://www.aa-trucking.com",
+    badge="UNCONFIRMED", note="Lane's prospect (~2 guests). Marked attending in the tracker but Evite RSVP not yet confirmed; not yet slotted to a team.")
+ 
 OVERNIGHT_KEYS=["munday","walls","gorton","hoey","chaney","miller","brock","dbaker","msmith"]
-
+ 
 CONFIRMED_KEYS=["munday","redsch","walls","kirk","carter","avery","pfeil","miranda","priddy","erik","tj","alvin",
  "brad","doug","gorton","horgan","urbanc","boyd","chaney","ortiz","hoey","colt","miller","brock",
  "denny","garrett","strider","robber","bradford","ward","zamora","dbaker","msmith"]
-UNCONF_KEYS=["toms","hayden","morrow","sean","kates","cook","buster","page","jessup","amilian","tara","tamara","barnes","oquinn","moore","lisa"]
-
+UNCONF_KEYS=["toms","hayden","morrow","sean","kates","cook","buster","page","jessup","hazen","amilian","tara","tamara","barnes","oquinn","moore","lisa"]
+ 
 REP_ORDER=["Current Partner","Elijah Lee","Stephen Mitchell","Troy Williams","David Harbin"]
-
+ 
 # ---- Assignments = previous (post-meeting) list + Michael's update ----
 # Base data already reflects the meeting moves (Shawn Priddy->Elijah, Hights->Troy, Munday/Schulze->Elijah).
 # Update: no one assigned to Graham or Lane. Graham's people split Elijah/Stephen; Lane's -> Troy.
@@ -276,7 +279,7 @@ for _k in ["doug","alvin","hayden","morrow","colt"]:
 for _k in P:
     if P[_k]["rep"]=="Troy Williams" and not P[_k].get("role"):
         P[_k]["role"]="OWNER (not shooting)"
-
+ 
 # ---- Current partners (existing clients): no prospecting rep; label "Current Partner" ----
 CURRENT_PARTNERS={"munday","denny","garrett","gorton","chaney","ortiz","hoey"}
 for _k in CURRENT_PARTNERS:
@@ -284,7 +287,7 @@ for _k in CURRENT_PARTNERS:
         P[_k]["rep"]="Current Partner"
         if P[_k].get("role")=="OWNER (not shooting)":
             P[_k].pop("role",None)
-
+ 
 # ---- Best-fit rating (1-5) vs Harbinger ICP (OK trades/construction/home-services/mfg/energy-svcs) ----
 # Grounded in Harbinger's 271-client base: core trades + construction score highest; existing clients = 5;
 # enterprises / banks-as-buyers / nonprofits / associations / unknown = low.
@@ -294,23 +297,99 @@ FITSCORE={
  "boyd":2,"strider":2,"zamora":2,"ward":2,"bradford":3,"robber":3,"colt":4,"miller":3,"brock":3,
  "chaney":5,"ortiz":5,"hoey":5,"dbaker":4,"msmith":3,
  "toms":4,"hayden":4,"morrow":4,"sean":5,"kates":4,"cook":5,"buster":4,"page":4,"jessup":4,
- "amilian":4,"tara":4,"tamara":3,"lisa":4,"barnes":5,"oquinn":4,"moore":2,
+ "amilian":4,"tara":4,"tamara":3,"lisa":4,"barnes":5,"oquinn":4,"moore":2,"hazen":3,
 }
 for _k,_s in FITSCORE.items():
     if _k in P: P[_k]["fit"]=_s
-
+ 
+# ---- Enrichment pass (Asana sweep + web research, Jun 22): headshots, corrected companies, emails, phones ----
+ENRICH={
+ "brock":{"photo":"https://dunlapcodding.com/wp-content/uploads/2019/02/Marc-Brockhaus-164_Web.jpg",
+          "email":"mbrockhaus@dunlapcodding.com","phone":"405-607-8610","website":"https://www.dunlapcodding.com",
+          "note":"Legacy overnight group (David's guest); attorney-director, Dunlap Codding (IP law, OKC)."},
+ "miller":{"website":"https://www.oneatlantataxsolutions.com","linkedin":"https://www.linkedin.com/in/cmiller33367/",
+           "email":"consult@oneatlantataxsolutions.com","phone":"(470) 873-9940",
+           "note":"Legacy overnight group (David's guest); Founder/CEO, One Atlanta Tax Solutions (Kennesaw GA)."},
+ "dbaker":{"website":"https://www.midtownconstructionok.com","linkedin":"https://www.linkedin.com/in/dean-baker-25252523/",
+           "note":"Came with GES/Scott Munday. President, Midtown Construction Services (Edmond OK; a branch of A.C. Owen Construction)."},
+ "robber":{"photo":"https://twistedoakllc.com/uploads/3/6/4/8/36483916/published/mike.jpg","email":"mike@twistedoakllc.com",
+           "note":"Managing Partner, Twisted Oak (real estate). Team also brings Scott Stedman, Scott Lemming, Matt Johnson."},
+ "buster":{"photo":"https://paladin.land/cdn/shop/files/16_e9b1820c-9a1e-439a-939a-dc738006a110.png?v=1752605656&width=1080",
+           "phone":"(918) 582-5404","note":"Principal/CEO, Paladin Land Group."},
+ "amilian":{"photo":"https://machenergyllc.com/wp-content/uploads/2025/03/Matt-Amilian-HS-scaled.jpg","phone":"405-263-7707",
+            "note":"Director of Business Development, Mach Energy Services."},
+ "tamara":{"photo":"https://cdn.theorg.com/4cd43375-7de1-4ca1-b846-1f129e756d94_thumb.jpg",
+           "note":"Exec Assistant, The Gateway Companies / Gateway Pipeline. McGuire family are the principals."},
+ "oquinn":{"photo":"https://pavementproseal.com/wp-content/uploads/2024/12/alex-oquinn.jpg",
+           "email":"thepavementpro@gmail.com","phone":"(405) 544-4657","note":"Owner/Founder, PavementPro."},
+ "strider":{"company":"FireRock Energy Services","website":"https://firerock.services","email":"allen.strider@firerockservices.com",
+            "phone":"(405) 465-3354","linkedin":"https://www.linkedin.com/in/r-allen-strider-8422a0120/",
+            "note":"CORRECTED: now FireRock Energy Services (OKC directional drilling), not KLX. On Toby Keith & CASA clay-shoot committees."},
+ "urbanc":{"company":"First Citizens Bank (moved from JPMorgan)","email":"roy.urbanc@firstcitizens.com",
+           "note":"CORRECTED: VP Business Banking at First Citizens since Nov 2023 - the old JPMorgan email is dead. Brings Koby Penny. Two-way referral partner."},
+ "bradford":{"company":"Company unverified","website":"",
+             "note":"RSVP'd 'Looking forward to it!' Employer unverified ('Bending Steel Farms' is an OK cattle operation, not his firm). Confirm with inviter."},
+ "boyd":{"linkedin":"https://www.linkedin.com/in/robertboyd/","phone":"(918) 585-1220",
+         "note":"Chairman/President of the foundation; also founder of Boston Street Advisors (Tulsa). Community connector."},
+ "colt":{"phone":"(833) 652-5438","note":"Heavy-haul/crane (Southern Lifting & Hoisting); on Phil Hoey's team. Greeting owned by Troy. Person-company link unverified."},
+ "avery":{"phone":"(405) 285-5711","note":"Executive Director, ORCA - high-value connector. No public non-LinkedIn headshot."},
+ "jessup":{"name":"Jackson Jessop (a/k/a Jason Jessup)","company":"Timber Wolf Excavating","website":"https://twolfx.com",
+           "linkedin":"https://www.linkedin.com/in/jackson-jessop-329a55182","email":"jackson@twolfx.com","phone":"(918) 284-1566",
+           "note":"Owner/CEO, Timber Wolf Excavating (Broken Arrow). Name shows as 'Jackson Jessop' in tracker, 'Jason Jessup' on the teams sheet - confirm."},
+ "ward":{"note":"Company still unknown. Best lead: 'Gary Ward & Son Excavation' (OK excavation) - UNVERIFIED. Confirm with inviter."},
+ "zamora":{"note":"Company still unknown; no confident OK match found. Confirm with inviter who brought him. Michael & Mitchell fill the squad."},
+ "msmith":{"note":"Phil Hoey's +1; represents a DIFFERENT firm (not Hoey) - company still not in Asana/Evite/teams sheet. Get it from Phil Hoey. On Hoey's team (Phil, Matt Smith, Colt Hunter, David)."},
+ "lisa":{"note":"Tulsa office tech / managed IT (Preferred Business Systems; owner Mike Wolfinbarger). Last name not yet found - confirm."},
+ "robberson_dummy":{},
+}
+for _k,_d in ENRICH.items():
+    if _k in P and _d: P[_k].update(_d)
+ 
+# ---- Evite verification pass (Jun 22): RSVP emails/phones pulled live from the Evite "Yes" list ----
+EVITE={
+ "gorton":{"phone":"(405) 761-9165"},
+ "denny":{"phone":"(405) 202-8752"},
+ "garrett":{"phone":"(405) 479-5279"},
+ "robber":{"phone":"(405) 205-4279","email":"mike.robberson@yahoo.com","add_note":"Evite RSVP email; work address mike@twistedoakllc.com."},
+ "redsch":{"phone":"(405) 650-4319"},
+ "horgan":{"phone":"(281) 475-9316"},
+ "zamora":{"phone":"(863) 599-1504"},
+ "miranda":{"phone":"(405) 519-9827"},
+ "tj":{"phone":"(405) 314-5225"},
+ "priddy":{"phone":"(405) 234-0733"},
+ "hoey":{"phone":"(918) 271-3886"},
+ "pfeil":{"phone":"(405) 823-0193","add_note":"Evite confirms his email + party of 4."},
+ "ortiz":{"phone":"(405) 205-3109"},
+ "bradford":{"phone":"(405) 320-0458"},
+ "ward":{"phone":"(405) 205-1604"},
+ "erik":{"phone":"(405) 203-9286"},
+ "colt":{"phone":"(580) 922-0092","email":"colt.hunter@southernliftingandhoisting.com"},
+ "avery":{"phone":"(405) 436-0547"},
+ "strider":{"email":"rstrider2@outlook.com","add_note":"Evite RSVP email/phone above; work address allen.strider@firerockservices.com."},
+ "brad":{"add_note":"Evite RSVP came via Tiffany Jones: tiffany.jones@terrastarinc.com, (405) 974-1468."},
+ "munday":{"add_note":"Evite RSVP phone alt: (405) 288-2412 (party of 4)."},
+ "doug":{"add_note":"Evite RSVP phone alt: (918) 991-3200."},
+ "urbanc":{"phone":"(623) 882-5093","add_note":"Evite RSVP email roy.p.urbanc@jpmorgan.com (likely dead - use the First Citizens address)."},
+ "alvin":{"add_note":"Kevin King also confirmed on the Evite: kking@unitedsystemsok.com, (405) 365-6458."},
+}
+for _k,_d in EVITE.items():
+    if _k in P:
+        if _d.get("phone"): P[_k]["phone"]=_d["phone"]
+        if _d.get("email"): P[_k]["email"]=_d["email"]
+        if _d.get("add_note"): P[_k]["note"]=(P[_k].get("note","")+" "+_d["add_note"]).strip()
+ 
 def stars_html(n):
     if not n: return ""
     on='&#9733;'*n; off='&#9733;'*(5-n)
     return ('<div class="fit"><span class="stars">'+on+'<span class="off">'+off+
             '</span></span> <span class="muted">best fit '+str(n)+'/5</span></div>')
-
+ 
 def group_by_rep(keys):
     g={}
     for k in keys:
         g.setdefault(P[k]["rep"],[]).append(k)
     return g
-
+ 
 def render_groups(keys):
     g=group_by_rep(keys)
     out=[]
@@ -321,11 +400,11 @@ def render_groups(keys):
         cards="".join(card(P[k]) for k in ks)
         out.append(f'<div class="repgroup"><h3 style="border-left:6px solid {col}">{html.escape(rep)} <span class="cnt">{len(ks)}</span></h3><div class="grid">{cards}</div></div>')
     return "".join(out)
-
+ 
 overnight_html=render_groups(OVERNIGHT_KEYS)
 shoot_conf_html=render_groups(CONFIRMED_KEYS)
 shoot_unc_html=render_groups(UNCONF_KEYS)
-
+ 
 CABINS_HTML='''
 <div class="banner">Thursday-night guest cabins (per Troy's Sleeping Arrangements task). <b>KB Electric removed - no longer attending.</b> Harbinger team lodging is a separate hotel booking.</div>
 <div class="grid">
@@ -337,8 +416,93 @@ CABINS_HTML='''
  <div class="card"><div class="nm">Main Cabin (dinner venue; 3 rooms)</div><div class="meta" style="margin-top:6px">Room 1: <b>Marc Brockhaus</b> (Dunlap Codding)<br>Room 2: open<br>Room 3: open</div></div>
 </div>
 '''
-
+ 
 RUNOFSHOW_HTML='''
+<div class="banner"><b>Run of Show &mdash; v5 (source of truth), refreshed Jun 22, 2026.</b> Step-by-step from leaving the Harbinger office through the event and back, plus every link you need on the day. Items marked <i>Open/CONFIRM</i> still need confirming.</div>
+<div class="rosblock"><h3>All event links</h3><ul class="roslist">
+<li><b>Raffle kiosk</b> (iPad sign-up to win the Benelli): <a target="_blank" href="https://cedar-gate-raffle.vercel.app/">cedar-gate-raffle.vercel.app</a></li>
+<li><b>Raffle admin</b> (draw/redraw winner, export CSV): <a target="_blank" href="https://cedar-gate-raffle.vercel.app/admin">/admin</a></li>
+<li><b>Demo booking</b> (Calendly &mdash; same link behind the table QR + closing email): <a target="_blank" href="https://calendly.com/d/ct7g-x3g-mb5/the-harbinger-demo-okc">Harbinger Demo OKC</a></li>
+<li><b>Clay Shoot Evite</b>: <a target="_blank" href="https://evite.me/HarbingerClays">evite.me/HarbingerClays</a></li>
+<li><b>Outreach / RSVP tracker</b>: <a target="_blank" href="https://docs.google.com/spreadsheets/d/1O363mPR0ZpvjpsfiJ-3G4XI3LCZS_huZrxk_Mn_W5Pg/edit">Tracker sheet</a></li>
+<li><b>Attendee / prospect sheet</b>: <a target="_blank" href="https://docs.google.com/spreadsheets/d/16REPxLEVFuvRX4rkadq_8KiAbGX9l11IMSJD5VCWk1A/edit">Attendee sheet</a></li>
+<li><b>Waiver</b> (everyone signs): <a target="_blank" href="https://app.waiversign.com/e/612528c3663fa30019930f0d/doc/61252945663fa30019930fde?eventName=Harbinger%202026">WaiverSign</a></li>
+<li><b>Event video</b>: in the "Harbinger Cedar Gate Event Video" Asana task (Dropbox)</li>
+<li><b>Venue</b>: Stacey Holden &mdash; 405-370-1952 &middot; sholden@thecedargate.com</li>
+</ul></div>
+<div class="rosblock"><h3>Who's who &amp; travel</h3><ul class="roslist">
+<li><b>Flying Thursday Jun 25 on Delta DL2490 (8):</b> Michael Pollard, Lane McPherson, Graham Turner, Stephen Mitchell, Mitchell Attaway, Parrish Walton, Justin Culbertson, Chris Scott (camera).</li>
+<li><b>Flying in earlier with their OWN vehicles</b> (not on the Thursday flight, not in the rentals): Troy Williams, Elijah Lee, David Harbin.</li>
+<li><b>Flight:</b> Delta DL2490, conf# GINV8Z &middot; ATL &rarr; OKC &middot; dep 9:18 AM ET / arr 10:29 AM CT. Be at ATL by ~7:15 AM.</li>
+<li><b>Rentals:</b> 2 vehicles (size up to full-size SUV/van) for the 8 flyers + luggage + locked firearm cases + camera gear + supply stops.</li>
+<li><b>Lodging:</b> Holiday Inn Express (~6 rooms); re-check Loft (5) vs hotel split for the Thursday-night group.</li>
+</ul></div>
+<div class="rosblock"><h3>Roles at a glance</h3><ul class="roslist">
+<li><b>David Harbin</b> &mdash; host presence; 20-min lunch presentation.</li>
+<li><b>Elijah Lee</b> &mdash; setup table with Michael (QR codes, booth, shotgun, signage); partner/prospect host; gives the Harbinger story talk at lunch (from his GUCA outline; highlight the new OKC location).</li>
+<li><b>Michael Pollard</b> &mdash; logistics lead / event quarterback; setup table; raffle app + kiosk; runs the day; cues the timed demo email.</li>
+<li><b>Mitchell Attaway</b> &mdash; registration + lunch material setup; owns the registration + raffle kiosk station.</li>
+<li><b>Stephen Mitchell</b> &mdash; cabin gift placement (with Parrish); raffle winner announcement + hype; thanks guests at the end.</li>
+<li><b>Parrish Walton</b> &mdash; cabin gift placement (with Stephen); partner/prospect host; FFL gun transfer.</li>
+<li><b>Lane / Graham / Justin</b> &mdash; water-bottle wrapping + cart prep (2 Harbinger hats per cart).</li>
+<li><b>Chris Scott</b> &mdash; camera operator; sets up only his own gear. Key moments: clay shoot, David's talk, raffle draw, candid dinner shots.</li>
+</ul></div>
+<div class="rosblock"><h3>Thursday, June 25 &mdash; travel, setup &amp; overnight</h3><ul class="roslist">
+<li>~6:00 AM &mdash; depart Harbinger office (Tyrone), drive to ATL (CONFIRM exact time; earlier if firearm check needed).</li>
+<li>9:18 AM ET &mdash; DL2490 departs ATL &rarr; 10:29 AM CT arrives OKC.</li>
+<li>On arrival &mdash; pick up 2 rentals; split supply stops: <b>Vehicle 1 = wine</b> (dinner/cabin gifts), <b>Vehicle 2 = water bottles + snacks</b>. OKC &rarr; Kingfisher ~45 min.</li>
+<li><b>~2:00 PM</b> &mdash; team arrives Cedar Gate; setup before guests (cabins should be unlocked &mdash; confirm time with Stacey).</li>
+<li><b>Setup split:</b> cabin gifts (Stephen + Parrish) &middot; water bottles + carts (Lane + Graham + Justin) &middot; registration + lunch space at The Carriage House (Michael + Mitchell) &middot; booth / QR / shotgun / signage (Michael + Elijah + Stephen) &middot; iPad kiosk test + reset to zero, confirm Wi-Fi (Michael) &middot; camera gear (Chris).</li>
+<li>4:30&ndash;5:00 PM &mdash; guest cabin check-in.</li>
+<li>6:30 PM &mdash; dinner at the Lodge (Steak &amp; Salmon); each host sits with their prospects.</li>
+<li>8:00 PM &mdash; bourbon tasting / cocktail hour (Hoey's bourbon; Troy picks up).</li>
+<li><i>Open:</i> Big Gun / six-stand experience &mdash; confirm with Stacey whether it's on for 2026 and the time.</li>
+</ul></div>
+<div class="rosblock"><h3>Friday, June 26 &mdash; event day</h3><ul class="roslist">
+<li>~7:45 AM &mdash; final setup sweep at The Carriage House (iPad on entry form at zero, Wi-Fi confirmed, registration staffed, QR stands on tables, carts staged).</li>
+<li><b>8:30 AM &mdash; registration + breakfast</b> (Cedar Gate Wrap). <b>Combined station (Mitchell owns):</b> fill out the raffle entry on the iPad &rarr; write a handwritten name tag (NAME + COMPANY) &rarr; breakfast. This funnels every walk-on teammate through the iPad so we capture their contact info &mdash; frame it as the entry to win the Benelli. Hosts greet and find their guests; Michael floats; Chris captures.</li>
+<li>9:45 AM &mdash; safety training (Cedar Gate staff).</li>
+<li><b>10:00 AM &mdash; clay shoot</b> (one course reserved, ~70 shooters; hosts shoot alongside their prospects). Right after: Michael/Mitchell export the raffle CSV from /admin to build the demo list before lunch.</li>
+<li><b>12:00 PM &mdash; lunch (The Chop) + presentations.</b> Elijah: Harbinger story talk (highlight the new OKC location). David: 20-min talk &mdash; (1) make your business look as credible as it actually is; (2) what it costs to get a new customer and how to scale it; (3) how to get in front of your best future employees. Close: David invites everyone to book a 10-min demo via the table QR.</li>
+<li><b>TIMED SEND</b> &mdash; as David closes, Michael cues Luke, who fires the demo email (Mailchimp) to all Evite registrants + raffle entrants. Goal: phones buzz in the room.</li>
+<li><b>Raffle draw</b> &mdash; Stephen announces/hypes; use the admin DRAW WINNER button (iPad on a screen if possible). Winner does NOT take the gun on-site &mdash; visits the FFL dealer, completes ATF Form 4473, presents photo ID, passes a NICS check. If they fail, use Redraw for a backup. Capture winner info for the FFL handoff.</li>
+<li><b>Wrap</b> &mdash; Stephen thanks guests; hosts lock next steps (book the demo on the spot); teardown; export the final raffle CSV before leaving.</li>
+<li><b>Return</b> &mdash; Thursday-flight group &rarr; OKC airport, return rentals, fly ATL (Fri evening &mdash; CONFIRM time). Troy/Elijah/David handle their own return.</li>
+</ul></div>
+<div class="rosblock"><h3>Headcounts &amp; food</h3><ul class="roslist">
+<li>Thursday dinner at the Lodge: <b>25</b> (Steak &amp; Salmon).</li>
+<li>Friday breakfast (Cedar Gate Wrap) + lunch (The Chop): <b>~140</b> (latest venue confirm; v5 draft said 125 &mdash; reconcile with Stacey).</li>
+<li>Clay shoot: one course, <b>~70 shooters</b>; ~35 teams registered. <i>Open:</i> 60 vs 100 target course decision (Michael/Stacey).</li>
+</ul></div>
+<div class="rosblock"><h3>Key dependencies &amp; open items</h3><ul class="roslist">
+<li>Handwritten name tags &mdash; Martha (bring/ship blank write-on tags; no pre-printing).</li>
+<li>Tyrone &rarr; ATL departure time &mdash; Michael / Martha.</li>
+<li>2 rental vehicles + driver / supply-stop assignments (V1 wine, V2 water + snacks).</li>
+<li>Chris Scott travel + lodging (same Thursday flight; +1 hotel room).</li>
+<li>Troy / Elijah / David earlier travel + own vehicles (NOT on DL2490).</li>
+<li>Thursday-night lodging split &mdash; Loft (5) vs hotel.</li>
+<li>Big Gun / six-stand &mdash; confirm on for 2026 + time (Stacey).</li>
+<li>Confirm Thursday dinner headcount (25) with Stacey.</li>
+<li>Pre-event waiver send (Michael).</li>
+<li>Demo email pre-built in Mailchimp, timed to David's close (Luke); Michael cues.</li>
+<li>Combined email list (Evite + raffle entries) &mdash; Michael / Mitchell.</li>
+<li>QR code stands printed + acrylic holders (design / ops).</li>
+<li>Shotgun inventory + locked travel cases + locks (everyone flying needs a gun); confirm firearm travel with Delta.</li>
+<li>Confirm what's already shipped (Martha).</li>
+</ul></div>
+<div class="rosblock"><h3>Packing / shipping</h3><ul class="roslist">
+<li>Ship large materials ahead to: <b>209 French Park, Suite 103, Edmond, OK 73034</b> (Stacey's office; she delivers to the property). Confirm what's shipped with Martha.</li>
+<li>Carry with the team: iPad (raffle kiosk) + charger + backup battery; Chris's camera gear (lithium batteries in carry-on).</li>
+<li>Personal: each shooter handles their own shotgun + ammo per airline rules (TSA-declared, locked hard case, checked), eye/ear protection, overnight bag.</li>
+<li>Buy on arrival: wine, water bottles, snacks.</li>
+</ul></div>
+<div class="rosblock"><h3>Quick contacts</h3><ul class="roslist">
+<li>Stacey Holden (Cedar Gate): 405-370-1952 &middot; sholden@thecedargate.com</li>
+<li>Michael Pollard (event lead): 678-371-9039</li>
+<li>Add day-of cells for David, Elijah, Stephen, Parrish, Lane, Graham, Mitchell, Justin, Chris.</li>
+</ul></div>
+'''
+_OLD_ROS='''
 <div class="banner"><b>Updated June 19, 2026.</b> Single source of truth - from leaving the Harbinger office (Tyrone, GA) through the event and back. Items still to confirm are flagged.</div>
 <div class="rosblock"><h3>All event links</h3><ul class="roslist">
 <li><b>Raffle kiosk</b> (iPad sign-up): <a target="_blank" href="https://cedar-gate-raffle.vercel.app/">cedar-gate-raffle.vercel.app</a></li>
@@ -401,7 +565,7 @@ RUNOFSHOW_HTML='''
 <li>Stacey Holden 405-370-1952 &middot; Abi Hill 405-795-9646 &middot; Michael Pollard 678-371-9039</li>
 </ul></div>
 '''
-
+ 
 HTML=f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Cedar Gate Connection Cheat Sheet</title>
@@ -461,12 +625,12 @@ h1{{font-size:22px;margin:0 0 2px;color:#1f3a5f}}
  <div class="tab" onclick="show('ros',this)">Run of Show</div>
  <div class="tab" onclick="show('cab',this)">Cabins</div>
 </div>
-
+ 
 <div id="ov" class="page active">
  <div class="banner"><b>Thursday overnight stay</b> - dinner, five-stand, bourbon at the cabins. Everyone here is also at Friday's shoot. <b>Current Partners</b> (existing clients) are grouped first - relationship time, no prospecting rep. New prospects show their assigned Harbinger host.</div>
  {overnight_html}
 </div>
-
+ 
 <div id="sh" class="page">
  <div class="banner"><b>Friday shoot - confirmed attendees</b>, grouped by the Harbinger person who owns the connection (the prior list, with the meeting updates applied). <b>No one is assigned to Graham or Lane.</b> Graham's invitees split between Elijah &amp; Stephen; Lane's go to Troy; the unconnected guests stay with Troy. Troy &amp; Chris don't shoot - Troy greets/owns only; support staff fill open squad seats.</div>
  {shoot_conf_html}
@@ -474,10 +638,10 @@ h1{{font-size:22px;margin:0 0 2px;color:#1f3a5f}}
  <div class="banner" style="background:#fdf6ec;border-color:#f0e0c8">Still being confirmed. Lane's invitees now owned by Troy; Graham's split between Elijah &amp; Stephen.</div>
  {shoot_unc_html}
 </div>
-
+ 
 <div id="ros" class="page">{RUNOFSHOW_HTML}</div>
 <div id="cab" class="page">{CABINS_HTML}</div>
-
+ 
 <div class="foot">Counts verified against the live Evite (Yes = 96) on Jun 19, 2026. Links double-verified. Photos link out to public sources (sandbox can't embed images inline).</div>
 </div>
 <script>
@@ -491,9 +655,8 @@ function show(id,el){{
 }}
 </script>
 </body></html>'''
-
+ 
 import os
 out=os.path.join(os.getcwd(), "cedar_gate_cheatsheet_photos.html" if IMG_MODE else "cedar_gate_cheatsheet.html")
 open(out,"w").write(HTML)
 print("WROTE",out,len(HTML),"bytes")
-
