@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 import html, hashlib, sys
 IMG_MODE = ('--photos' in sys.argv)   # standalone version embeds real <img> headshots (renders outside the sandbox)
- 
+
 REPCOLOR = {
  "Troy Williams":"#1f3a5f","Stephen Mitchell":"#2f6b3d","Elijah Lee":"#5a3e85",
  "Graham Turner":"#1f6b6b","Lane McPherson":"#9c5a1f","David Harbin":"#7a4a2b","Current Partner":"#1a7f4b",
  "Michael Pollard":"#41617f","Mitchell Attaway":"#6b7785","Justin Culbertson":"#8a6d3b","Parrish Walton":"#5e7d8a",
 }
- 
+
 def initials(name):
     parts=[p for p in name.replace("/"," ").split() if p[:1].isalpha()]
     if not parts: return "?"
     if len(parts)==1: return parts[0][:2].upper()
     return (parts[0][0]+parts[-1][0]).upper()
- 
+
 def avatar(p):
     col=REPCOLOR.get(p["rep"],"#444")
     ini=initials(p["name"])
@@ -25,7 +25,7 @@ def avatar(p):
     if p.get("photo"):
         return f'<a href="{html.escape(p["photo"])}" target="_blank" title="Open photo" class="avlink">{inner}<span class="cam">photo</span></a>'
     return inner
- 
+
 def chips(p):
     out=[]
     out.append(f'<span class="chip rep" style="background:{REPCOLOR.get(p["rep"],"#444")}">{html.escape(p["rep"])}</span>')
@@ -34,21 +34,21 @@ def chips(p):
     if p.get("overnight"): out.append('<span class="chip ov">OVERNIGHT</span>')
     if p.get("client"): out.append('<span class="chip cl">CLIENT</span>')
     return "".join(out)
- 
+
 def links(p):
     L=[]
     if p.get("linkedin"): L.append(f'<a href="{html.escape(p["linkedin"])}" target="_blank">LinkedIn</a>')
     if p.get("website"): L.append(f'<a href="{html.escape(p["website"])}" target="_blank">Website</a>')
     if p.get("photo"): L.append(f'<a href="{html.escape(p["photo"])}" target="_blank">Photo</a>')
     return " &middot; ".join(L) if L else '<span class="muted">no links</span>'
- 
+
 def contact(p):
     bits=[]
     if p.get("email"): bits.append(html.escape(p["email"]))
     if p.get("phone"): bits.append(html.escape(p["phone"]))
     if p.get("team"): bits.insert(0,f'<b>Team {html.escape(p["team"])}</b>')
     return " &middot; ".join(bits)
- 
+
 def card(p):
     note=f'<div class="note">{html.escape(p["note"])}</div>' if p.get("note") else ""
     return f'''<div class="card">
@@ -60,12 +60,12 @@ def card(p):
       <div class="links">{links(p)}</div>
       {note}
     </div>'''
- 
+
 # ---------------- DATA ----------------
 # rep = assigned Harbinger person; role = SHOOTER/OWNER/etc.
 P = {}
 def add(key,**kw): P[key]=kw
- 
+
 # OVERNIGHT principals (also at shoot)
 add("munday", name="Scott Munday", company="B&H Construction / GES", rep="Elijah Lee", role="Cabin 1 / Dean Baker (Midtown Constr.)",
     team="4", email="scott@bhboring.com", phone="(405) 409-4158", website="https://www.ges.energy",
@@ -115,7 +115,7 @@ add("wilkerson", name="Brad Wilkerson", company="Guest of FNBT (John Gorton)", r
     badge="CONFIRMED", note="John Gorton's (FNBT) Friday-shoot guest (coordinated via Anna).")
 add("bethea", name="Jerry Bethea", company="Guest of FNBT (John Gorton)", rep="Stephen Mitchell",
     badge="CONFIRMED", note="John Gorton's (FNBT) Friday-shoot guest (coordinated via Anna).")
- 
+
 # SHOOT-DAY confirmed (not overnight)
 add("brad", name="Brad Wittrock / Tiffany Jones", company="TerraStar Inc.", rep="Graham Turner",
     team="4", email="brad.wittrock@terrastarinc.com", phone="405-200-1336", website="https://www.terrastarinc.com",
@@ -201,7 +201,7 @@ add("ortiz", name="David Ortiz", company="Legacy & Succession (Team 2)", rep="Da
     linkedin="https://www.linkedin.com/in/david-ortiz-exit-planner/",
     photo="https://cdn.prod.website-files.com/691111b36cbdfb41187af5f6/6983c12818a1a63e92893ac6_hf_20260129_190025_abb52303-fa7f-4eae-a52d-cc92761dc98b-Photoroom.png",
     client=True, badge="CONFIRMED", note="Harbinger client firm; exit planner.")
- 
+
 # UNCONFIRMED (chasing) - shoot page only
 add("toms", name="Matthew Toms", company="Bostick Services", rep="Lane McPherson",
     team="4", email="mltoms1212@gmail.com", phone="(405) 657-9296", website="https://bostickservicescorp.com",
@@ -251,17 +251,17 @@ add("lisa", name="Lisa (last name TBD)", company="Preferred Business Systems", r
 add("hazen", name="Julie Hazen", company="A&A Trucking", rep="Troy Williams",
     email="jhazen@aa-trucking.com", phone="(405) 323-2985", website="https://www.aa-trucking.com",
     badge="UNCONFIRMED", note="Lane's prospect (~2 guests). Marked attending in the tracker but Evite RSVP not yet confirmed; not yet slotted to a team.")
- 
+
 OVERNIGHT_KEYS=["munday","walls","eddy","gorton","stanton","hoey","chaney","miller","brock","dbaker","msmith"]
- 
+
 CONFIRMED_KEYS=["munday","redsch","walls","eddy","kirk","carter","avery","pfeil","miranda","priddy","erik","tj","alvin",
  "brad","doug","gorton","horgan","urbanc","boyd","chaney","ortiz","hoey","colt","miller","brock",
  "denny","garrett","strider","robber","bradford","ward","zamora","dbaker","msmith",
  "stanton","wilkerson","bethea"]
 UNCONF_KEYS=["toms","morrow","kates","buster","page","jessup"]
- 
+
 REP_ORDER=["Current Partner","Elijah Lee","Stephen Mitchell","Troy Williams","David Harbin","Lane McPherson","Graham Turner"]
- 
+
 # ---- Assignments = previous (post-meeting) list + Michael's update ----
 # Base data already reflects the meeting moves (Shawn Priddy->Elijah, Hights->Troy, Munday/Schulze->Elijah).
 # Update: no one assigned to Graham or Lane. Graham's people split Elijah/Stephen; Lane's -> Troy.
@@ -270,7 +270,7 @@ REASSIGN={
  # Graham's -> Elijah
  "erik":"Elijah Lee","tj":"Elijah Lee","moore":"Elijah Lee",
  # Graham's -> Stephen
- "brad":"Stephen Mitchell","alvin":"Stephen Mitchell","amilian":"Stephen Mitchell","tara":"Stephen Mitchell",
+ "brad":"Elijah Lee","alvin":"Stephen Mitchell","amilian":"Stephen Mitchell","tara":"Stephen Mitchell",
  "tamara":"Stephen Mitchell","barnes":"Stephen Mitchell","oquinn":"Stephen Mitchell","lisa":"Stephen Mitchell",
  # Lane's -> Troy
  "doug":"Troy Williams","toms":"Troy Williams","hayden":"Troy Williams","morrow":"Troy Williams",
@@ -289,7 +289,7 @@ for _k in ["doug","alvin","hayden","morrow","colt"]:
 for _k in P:
     if P[_k]["rep"]=="Troy Williams" and not P[_k].get("role"):
         P[_k]["role"]="OWNER (not shooting)"
- 
+
 # ---- Current partners (existing clients): no prospecting rep; label "Current Partner" ----
 CURRENT_PARTNERS={"munday","denny","garrett","gorton","chaney","ortiz","hoey"}
 for _k in CURRENT_PARTNERS:
@@ -297,7 +297,7 @@ for _k in CURRENT_PARTNERS:
         P[_k]["rep"]="Current Partner"
         if P[_k].get("role")=="OWNER (not shooting)":
             P[_k].pop("role",None)
- 
+
 # ---- Unconfirmed stay with their ORIGINAL inviter (Lane or Graham) until they RSVP yes ----
 # Only after confirming do they move to their host (Troy / Elijah / Stephen).
 UNCONF_INVITER={
@@ -311,7 +311,7 @@ for _k,_r in UNCONF_INVITER.items():
     if _k in P:
         P[_k]["rep"]=_r
         P[_k].pop("role",None)
- 
+
 # ---- Best-fit rating (1-5) vs Harbinger ICP (OK trades/construction/home-services/mfg/energy-svcs) ----
 # Grounded in Harbinger's 271-client base: core trades + construction score highest; existing clients = 5;
 # enterprises / banks-as-buyers / nonprofits / associations / unknown = low.
@@ -325,7 +325,7 @@ FITSCORE={
 }
 for _k,_s in FITSCORE.items():
     if _k in P: P[_k]["fit"]=_s
- 
+
 # ---- Enrichment pass (Asana sweep + web research, Jun 22): headshots, corrected companies, emails, phones ----
 ENRICH={
  "brock":{"photo":"https://dunlapcodding.com/wp-content/uploads/2019/02/Marc-Brockhaus-164_Web.jpg",
@@ -368,7 +368,7 @@ ENRICH={
 }
 for _k,_d in ENRICH.items():
     if _k in P and _d: P[_k].update(_d)
- 
+
 # ---- Evite verification pass (Jun 22): RSVP emails/phones pulled live from the Evite "Yes" list ----
 EVITE={
  "gorton":{"phone":"(405) 761-9165"},
@@ -401,19 +401,19 @@ for _k,_d in EVITE.items():
         if _d.get("phone"): P[_k]["phone"]=_d["phone"]
         if _d.get("email"): P[_k]["email"]=_d["email"]
         if _d.get("add_note"): P[_k]["note"]=(P[_k].get("note","")+" "+_d["add_note"]).strip()
- 
+
 def stars_html(n):
     if not n: return ""
     on='&#9733;'*n; off='&#9733;'*(5-n)
     return ('<div class="fit"><span class="stars">'+on+'<span class="off">'+off+
             '</span></span> <span class="muted">best fit '+str(n)+'/5</span></div>')
- 
+
 def group_by_rep(keys):
     g={}
     for k in keys:
         g.setdefault(P[k]["rep"],[]).append(k)
     return g
- 
+
 def render_groups(keys):
     g=group_by_rep(keys)
     out=[]
@@ -424,11 +424,11 @@ def render_groups(keys):
         cards="".join(card(P[k]) for k in ks)
         out.append(f'<div class="repgroup"><h3 style="border-left:6px solid {col}">{html.escape(rep)} <span class="cnt">{len(ks)}</span></h3><div class="grid">{cards}</div></div>')
     return "".join(out)
- 
+
 overnight_html=render_groups(OVERNIGHT_KEYS)
 shoot_conf_html=render_groups(CONFIRMED_KEYS)
 shoot_unc_html=render_groups(UNCONF_KEYS)
- 
+
 CABINS_HTML='''
 <div class="banner">Thursday-night guest cabins (per Troy's Sleeping Arrangements task). <b>KB Electric removed - no longer attending.</b> Harbinger team lodging is a separate hotel booking.</div>
 <div class="grid">
@@ -440,7 +440,7 @@ CABINS_HTML='''
  <div class="card"><div class="nm">Main Cabin (dinner venue; 3 rooms)</div><div class="meta" style="margin-top:6px">Room 1: <b>Marc Brockhaus</b> (Dunlap Codding)<br>Room 2: open<br>Room 3: open</div></div>
 </div>
 '''
- 
+
 RUNOFSHOW_HTML='''
 <div class="banner"><b>Run of Show &mdash; v5 (source of truth), refreshed Jun 22, 2026.</b> Step-by-step from leaving the Harbinger office through the event and back, plus every link you need on the day. Items marked <i>Open/CONFIRM</i> still need confirming.</div>
 <div class="rosblock"><h3>All event links</h3><ul class="roslist">
@@ -455,8 +455,9 @@ RUNOFSHOW_HTML='''
 <li><b>Venue</b>: Stacey Holden &mdash; 405-370-1952 &middot; sholden@thecedargate.com</li>
 </ul></div>
 <div class="rosblock"><h3>Who's who &amp; travel</h3><ul class="roslist">
-<li><b>Flying Thursday Jun 25 on Delta DL2490 (8):</b> Michael Pollard, Lane McPherson, Graham Turner, Stephen Mitchell, Mitchell Attaway, Parrish Walton, Justin Culbertson, Chris Scott (camera).</li>
+<li><b>Flying Thursday Jun 25 on Delta DL2490 (7):</b> Michael Pollard, Lane McPherson, Graham Turner, Stephen Mitchell, Mitchell Attaway, Parrish Walton, Chris Scott (camera).</li>
 <li><b>Flying in earlier with their OWN vehicles</b> (not on the Thursday flight, not in the rentals): Troy Williams, Elijah Lee, David Harbin.</li>
+<li><b>Justin Culbertson</b> &mdash; NOT on the Thursday team flight (flying out separately for a meeting); confirm his event arrival.</li>
 <li><b>Flight:</b> Delta DL2490, conf# GINV8Z &middot; ATL &rarr; OKC &middot; dep 9:18 AM ET / arr 10:29 AM CT. Be at ATL by ~7:15 AM.</li>
 <li><b>Rentals:</b> 2 vehicles (size up to full-size SUV/van) for the 8 flyers + luggage + locked firearm cases + camera gear + supply stops.</li>
 <li><b>Lodging:</b> Holiday Inn Express (~6 rooms); re-check Loft (5) vs hotel split for the Thursday-night group.</li>
@@ -589,7 +590,7 @@ _OLD_ROS='''
 <li>Stacey Holden 405-370-1952 &middot; Abi Hill 405-795-9646 &middot; Michael Pollard 678-371-9039</li>
 </ul></div>
 '''
- 
+
 HTML=f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Cedar Gate Connection Cheat Sheet</title>
@@ -649,12 +650,12 @@ h1{{font-size:22px;margin:0 0 2px;color:#1f3a5f}}
  <div class="tab" onclick="show('ros',this)">Run of Show</div>
  <div class="tab" onclick="show('cab',this)">Cabins</div>
 </div>
- 
+
 <div id="ov" class="page active">
  <div class="banner"><b>Thursday overnight stay</b> - dinner, five-stand, bourbon at the cabins. Everyone here is also at Friday's shoot. <b>Current Partners</b> (existing clients) are grouped first - relationship time, no prospecting rep. New prospects show their assigned Harbinger host.</div>
  {overnight_html}
 </div>
- 
+
 <div id="sh" class="page">
  <div class="banner"><b>Friday shoot - confirmed attendees</b>, grouped by the Harbinger host who owns the connection. Confirmed guests sit with their host (Troy, Elijah, or Stephen); Graham's and Lane's invitees move to a host only once they RSVP yes - until then they're listed under Graham/Lane in the Unconfirmed section below. Troy &amp; Chris don't shoot - Troy greets/owns only; support staff fill open squad seats.</div>
  {shoot_conf_html}
@@ -662,10 +663,10 @@ h1{{font-size:22px;margin:0 0 2px;color:#1f3a5f}}
  <div class="banner" style="background:#fdf6ec;border-color:#f0e0c8"><b>These still need to be confirmed</b> - listed under the rep who invited them (<b>Lane</b> or <b>Graham</b>) so they know to chase the RSVP. Once a guest confirms yes, they move to their assigned host (Troy, Elijah, or Stephen).</div>
  {shoot_unc_html}
 </div>
- 
+
 <div id="ros" class="page">{RUNOFSHOW_HTML}</div>
 <div id="cab" class="page">{CABINS_HTML}</div>
- 
+
 <div class="foot">Counts verified against the live Evite (Yes = 96) on Jun 19, 2026. Links double-verified. Photos link out to public sources (sandbox can't embed images inline).</div>
 </div>
 <script>
@@ -679,7 +680,7 @@ function show(id,el){{
 }}
 </script>
 </body></html>'''
- 
+
 import os
 out=os.path.join(os.getcwd(), "cedar_gate_cheatsheet_photos.html" if IMG_MODE else "cedar_gate_cheatsheet.html")
 open(out,"w").write(HTML)
