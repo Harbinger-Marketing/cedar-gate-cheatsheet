@@ -124,7 +124,7 @@ add("carter", name="David Carter", company="Summit Technology Group", rep="Elija
     team="3", email="david.carter@stgok.com", phone="405-210-3068", website="https://www.stgok.com",
     linkedin="https://www.linkedin.com/in/stgok-dcarter/",
     photo="https://pronto-core-cdn.prontomarketing.com/2/wp-content/uploads/sites/1676/cache/2026/06/David-bio-pic/66257758.jpg",
-    badge="CONFIRMED", note="Demo completed 6/17 - hot. Team of 3 (open 4th seat).")
+    badge="CONFIRMED", note="Discovery completed 6/17 - hot. Team of 3 (open 4th seat).")
 add("kirk", name="Kirk Brown", company="K&C Manufacturing", rep="Elijah Lee", role="Elijah shoots here",
     team="2", email="kirk@kcmfg.us", phone="(580) 362-7496", website="https://kcmfg.us",
     linkedin="https://www.linkedin.com/in/kirk-brown-8b211969/", badge="CONFIRMED",
@@ -258,7 +258,7 @@ CONFIRMED_KEYS=["munday","redsch","walls","eddy","kirk","carter","avery","pfeil"
  "brad","doug","gorton","horgan","urbanc","boyd","chaney","ortiz","hoey","colt","miller","brock",
  "denny","garrett","strider","robber","bradford","ward","zamora","dbaker","msmith",
  "stanton","wilkerson","bethea"]
-UNCONF_KEYS=["toms","hayden","morrow","sean","kates","cook","buster","page","jessup","hazen","amilian","tara","tamara","barnes","oquinn","moore","lisa"]
+UNCONF_KEYS=["toms","morrow","kates","buster","page","jessup"]
  
 REP_ORDER=["Current Partner","Elijah Lee","Stephen Mitchell","Troy Williams","David Harbin","Lane McPherson","Graham Turner"]
  
@@ -446,7 +446,7 @@ RUNOFSHOW_HTML='''
 <div class="rosblock"><h3>All event links</h3><ul class="roslist">
 <li><b>Raffle kiosk</b> (iPad sign-up to win the Benelli): <a target="_blank" href="https://cedar-gate-raffle.vercel.app/">cedar-gate-raffle.vercel.app</a></li>
 <li><b>Raffle admin</b> (draw/redraw winner, export CSV): <a target="_blank" href="https://cedar-gate-raffle.vercel.app/admin">/admin</a> &middot; admin password: <code>cedargate2026</code></li>
-<li><b>Demo booking</b> (Calendly &mdash; same link behind the table QR + closing email): <a target="_blank" href="https://calendly.com/d/ct7g-x3g-mb5/the-harbinger-demo-okc">Harbinger Demo OKC</a></li>
+<li><b>Discovery booking</b> (Calendly &mdash; same link behind the table QR + closing email): <a target="_blank" href="https://calendly.com/d/ct7g-x3g-mb5/the-harbinger-demo-okc">Harbinger Discovery OKC</a></li>
 <li><b>Clay Shoot Evite</b>: <a target="_blank" href="https://evite.me/HarbingerClays">evite.me/HarbingerClays</a></li>
 <li><b>Outreach / RSVP tracker</b>: <a target="_blank" href="https://docs.google.com/spreadsheets/d/1O363mPR0ZpvjpsfiJ-3G4XI3LCZS_huZrxk_Mn_W5Pg/edit">Tracker sheet</a></li>
 <li><b>Attendee / prospect sheet</b>: <a target="_blank" href="https://docs.google.com/spreadsheets/d/16REPxLEVFuvRX4rkadq_8KiAbGX9l11IMSJD5VCWk1A/edit">Attendee sheet</a></li>
@@ -464,7 +464,7 @@ RUNOFSHOW_HTML='''
 <div class="rosblock"><h3>Roles at a glance</h3><ul class="roslist">
 <li><b>David Harbin</b> &mdash; host presence; 20-min lunch presentation.</li>
 <li><b>Elijah Lee</b> &mdash; setup table with Michael (QR codes, booth, shotgun, signage); partner/prospect host; gives the Harbinger story talk at lunch (from his GUCA outline; highlight the new OKC location).</li>
-<li><b>Michael Pollard</b> &mdash; logistics lead / event quarterback; setup table; raffle app + kiosk; runs the day; cues the timed demo email.</li>
+<li><b>Michael Pollard</b> &mdash; logistics lead / event quarterback; setup table; raffle app + kiosk; runs the day; cues the timed discovery email.</li>
 <li><b>Mitchell Attaway</b> &mdash; registration + lunch material setup; owns the registration + raffle kiosk station.</li>
 <li><b>Stephen Mitchell</b> &mdash; cabin gift placement (with Parrish); raffle winner announcement + hype; thanks guests at the end.</li>
 <li><b>Parrish Walton</b> &mdash; cabin gift placement (with Stephen); partner/prospect host; FFL gun transfer.</li>
@@ -486,11 +486,11 @@ RUNOFSHOW_HTML='''
 <li>~7:45 AM &mdash; final setup sweep at The Carriage House (iPad on entry form at zero, Wi-Fi confirmed, registration staffed, QR stands on tables, carts staged).</li>
 <li><b>8:30 AM &mdash; registration + breakfast</b> (Cedar Gate Wrap). <b>Combined station (Mitchell owns):</b> fill out the raffle entry on the iPad &rarr; write a handwritten name tag (NAME + COMPANY) &rarr; breakfast. This funnels every walk-on teammate through the iPad so we capture their contact info &mdash; frame it as the entry to win the Benelli. Hosts greet and find their guests; Michael floats; Chris captures.</li>
 <li>9:45 AM &mdash; safety training (Cedar Gate staff).</li>
-<li><b>10:00 AM &mdash; clay shoot</b> (one course reserved, ~70 shooters; hosts shoot alongside their prospects). Right after: Michael/Mitchell export the raffle CSV from /admin to build the demo list before lunch.</li>
-<li><b>12:00 PM &mdash; lunch (The Chop) + presentations.</b> Elijah: Harbinger story talk (highlight the new OKC location). David: 20-min talk &mdash; (1) make your business look as credible as it actually is; (2) what it costs to get a new customer and how to scale it; (3) how to get in front of your best future employees. Close: David invites everyone to book a 10-min demo via the table QR.</li>
-<li><b>TIMED SEND</b> &mdash; as David closes, Michael cues Luke, who fires the demo email (Mailchimp) to all Evite registrants + raffle entrants. Goal: phones buzz in the room.</li>
+<li><b>10:00 AM &mdash; clay shoot</b> (one course reserved, ~70 shooters; hosts shoot alongside their prospects). Right after: Michael/Mitchell export the raffle CSV from /admin to build the discovery list before lunch.</li>
+<li><b>12:00 PM &mdash; lunch (The Chop) + presentations.</b> Elijah: Harbinger story talk (highlight the new OKC location). David: 20-min talk &mdash; (1) make your business look as credible as it actually is; (2) what it costs to get a new customer and how to scale it; (3) how to get in front of your best future employees. Close: David invites everyone to book a 10-min discovery call via the table QR.</li>
+<li><b>TIMED SEND</b> &mdash; as David closes, Michael cues Luke, who fires the discovery email (Mailchimp) to all Evite registrants + raffle entrants. Goal: phones buzz in the room.</li>
 <li><b>Raffle draw</b> &mdash; Stephen announces/hypes; use the admin DRAW WINNER button (iPad on a screen if possible). Winner does NOT take the gun on-site &mdash; visits the FFL dealer, completes ATF Form 4473, presents photo ID, passes a NICS check. If they fail, use Redraw for a backup. Capture winner info for the FFL handoff.</li>
-<li><b>Wrap</b> &mdash; Stephen thanks guests; hosts lock next steps (book the demo on the spot); teardown; export the final raffle CSV before leaving.</li>
+<li><b>Wrap</b> &mdash; Stephen thanks guests; hosts lock next steps (book the discovery call on the spot); teardown; export the final raffle CSV before leaving.</li>
 <li><b>Return</b> &mdash; Thursday-flight group &rarr; OKC airport, return rentals, fly ATL (Fri evening &mdash; CONFIRM time). Troy/Elijah/David handle their own return.</li>
 </ul></div>
 <div class="rosblock"><h3>Headcounts &amp; food</h3><ul class="roslist">
@@ -508,7 +508,7 @@ RUNOFSHOW_HTML='''
 <li>Big Gun / six-stand &mdash; confirm on for 2026 + time (Stacey).</li>
 <li>Confirm Thursday dinner headcount (25) with Stacey.</li>
 <li>Pre-event waiver send (Michael).</li>
-<li>Demo email pre-built in Mailchimp, timed to David's close (Luke); Michael cues.</li>
+<li>Discovery email pre-built in Mailchimp, timed to David's close (Luke); Michael cues.</li>
 <li>Combined email list (Evite + raffle entries) &mdash; Michael / Mitchell.</li>
 <li>QR code stands printed + acrylic holders (design / ops).</li>
 <li>Shotgun inventory + locked travel cases + locks (everyone flying needs a gun); confirm firearm travel with Delta.</li>
