@@ -75,6 +75,9 @@ add("walls", name="Kevin Walls", company="Echo Contracting", rep="Elijah Lee", r
     team="4", email="kevin@echo-contracting.com", phone="(405) 401-7162", website="https://www.echo-contracting.com",
     linkedin="https://www.linkedin.com/in/kevin-walls-22074b71/", overnight=True, badge="CONFIRMED",
     note="Proposal presented; verbally confirmed - warmest open deal.")
+add("eddy", name="Eddy (last name TBD)", company="Echo Contracting", rep="Elijah Lee", role="Cabin 2 (w/ Kevin Walls)",
+    website="https://www.echo-contracting.com", overnight=True, badge="CONFIRMED",
+    note="Second Echo Contracting attendee, here with Kevin Walls (overnight + Friday). Last name TBD. Echo's shoot team also includes Jordan Hayes & Steve Holloway.")
 add("chaney", name="David Chaney", company="Legacy & Succession", rep="David Harbin", role="Cabin 4 / Chris Miller",
     team="5", email="David@legacysuccession.com", phone="(405) 614-2007", website="https://legacysuccession.com",
     linkedin="https://www.linkedin.com/in/davidchaneychfc/",
@@ -135,7 +138,7 @@ add("pfeil", name="Joshua Pfeil", company="Kodiak Gas Services", rep="Elijah Lee
 add("miranda", name="Derick Miranda", company="Dolese Bros.", rep="Elijah Lee",
     team="4", email="dmiranda@dolese.com", website="https://dolese.com", badge="CONFIRMED",
     note="100+ yr OK concrete institution (3 + 1 child).")
-add("redsch", name="Red (Steve) Schulze", company="B&H Construction (Team 2)", rep="Elijah Lee",
+add("redsch", name="Red (Steve) Schulze", company="B&H Construction/GES (Team 2)", rep="Elijah Lee",
     team="4", email="red@bhbroing.com", website="https://www.bhboring.com", badge="CONFIRMED",
     note="Heads B&H marketing & sales - strongest net-new prospect.")
 add("priddy", name="Shawn Priddy", company="Cultural Discipline", rep="Elijah Lee",
@@ -249,9 +252,9 @@ add("hazen", name="Julie Hazen", company="A&A Trucking", rep="Troy Williams",
     email="jhazen@aa-trucking.com", phone="(405) 323-2985", website="https://www.aa-trucking.com",
     badge="UNCONFIRMED", note="Lane's prospect (~2 guests). Marked attending in the tracker but Evite RSVP not yet confirmed; not yet slotted to a team.")
  
-OVERNIGHT_KEYS=["munday","walls","gorton","stanton","hoey","chaney","miller","brock","dbaker","msmith"]
+OVERNIGHT_KEYS=["munday","walls","eddy","gorton","stanton","hoey","chaney","miller","brock","dbaker","msmith"]
  
-CONFIRMED_KEYS=["munday","redsch","walls","kirk","carter","avery","pfeil","miranda","priddy","erik","tj","alvin",
+CONFIRMED_KEYS=["munday","redsch","walls","eddy","kirk","carter","avery","pfeil","miranda","priddy","erik","tj","alvin",
  "brad","doug","gorton","horgan","urbanc","boyd","chaney","ortiz","hoey","colt","miller","brock",
  "denny","garrett","strider","robber","bradford","ward","zamora","dbaker","msmith",
  "stanton","wilkerson","bethea"]
@@ -316,7 +319,7 @@ FITSCORE={
  "munday":5,"redsch":5,"walls":5,"kirk":4,"carter":4,"avery":3,"pfeil":2,"miranda":2,"priddy":3,
  "erik":4,"tj":4,"brad":4,"alvin":4,"doug":4,"denny":5,"garrett":5,"gorton":5,"horgan":4,"urbanc":2,
  "boyd":2,"strider":2,"zamora":2,"ward":2,"bradford":3,"robber":3,"colt":4,"miller":3,"brock":3,
- "chaney":5,"ortiz":5,"hoey":5,"dbaker":4,"msmith":3,"stanton":3,"wilkerson":3,"bethea":3,
+ "chaney":5,"ortiz":5,"hoey":5,"dbaker":4,"msmith":3,"stanton":3,"wilkerson":3,"bethea":3,"eddy":4,
  "toms":4,"hayden":4,"morrow":4,"sean":5,"kates":4,"cook":5,"buster":4,"page":4,"jessup":4,
  "amilian":4,"tara":4,"tamara":3,"lisa":4,"barnes":5,"oquinn":4,"moore":2,"hazen":3,
 }
@@ -442,7 +445,7 @@ RUNOFSHOW_HTML='''
 <div class="banner"><b>Run of Show &mdash; v5 (source of truth), refreshed Jun 22, 2026.</b> Step-by-step from leaving the Harbinger office through the event and back, plus every link you need on the day. Items marked <i>Open/CONFIRM</i> still need confirming.</div>
 <div class="rosblock"><h3>All event links</h3><ul class="roslist">
 <li><b>Raffle kiosk</b> (iPad sign-up to win the Benelli): <a target="_blank" href="https://cedar-gate-raffle.vercel.app/">cedar-gate-raffle.vercel.app</a></li>
-<li><b>Raffle admin</b> (draw/redraw winner, export CSV): <a target="_blank" href="https://cedar-gate-raffle.vercel.app/admin">/admin</a></li>
+<li><b>Raffle admin</b> (draw/redraw winner, export CSV): <a target="_blank" href="https://cedar-gate-raffle.vercel.app/admin">/admin</a> &middot; admin password: <code>cedargate2026</code></li>
 <li><b>Demo booking</b> (Calendly &mdash; same link behind the table QR + closing email): <a target="_blank" href="https://calendly.com/d/ct7g-x3g-mb5/the-harbinger-demo-okc">Harbinger Demo OKC</a></li>
 <li><b>Clay Shoot Evite</b>: <a target="_blank" href="https://evite.me/HarbingerClays">evite.me/HarbingerClays</a></li>
 <li><b>Outreach / RSVP tracker</b>: <a target="_blank" href="https://docs.google.com/spreadsheets/d/1O363mPR0ZpvjpsfiJ-3G4XI3LCZS_huZrxk_Mn_W5Pg/edit">Tracker sheet</a></li>
