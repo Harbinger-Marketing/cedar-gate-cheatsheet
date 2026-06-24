@@ -87,11 +87,11 @@ add("gorton", name="John Gorton", company="First National Bank & Trust (FNBT)", 
     team="1", email="JGorton@bankfnbt.com", website="https://www.bankfnbt.com",
     linkedin="https://www.linkedin.com/in/john-gorton-0208b084/", overnight=True, client=True, badge="CONFIRMED",
     role="Cabin 3", note="Harbinger client (WON ~$372K). CEO of 130-yr community bank. Bringing Ed Stanton (overnight, Cabin 3) + Brad Wilkerson & Jerry Bethea (Friday shoot).")
-add("hoey", name="Philip Hoey (+ Matt Smith)", company="Hoey Construction", rep="David Harbin",
+add("hoey", name="Philip Hoey (+ Wayne Richards)", company="Hoey Construction", rep="David Harbin",
     team="2", email="philh@hoeyconstruction.com", website="https://hoeyconstruction.com",
     linkedin="https://www.linkedin.com/in/philip-hoey-27867629/",
     photo="https://cdn.prod.website-files.com/69a0112dd5d06fd93d39669c/69fdd509dc1e72c50e4c34ec_philip-hoey.webp",
-    overnight=True, client=True, role="Cabin 5", badge="CONFIRMED", note="Harbinger client; bringing the bourbon Thursday night. Cabin 5 w/ Matt Smith.")
+    overnight=True, client=True, role="Cabin 5", badge="CONFIRMED", note="Harbinger client; bringing the bourbon Thursday night. Cabin 5 w/ Wayne Richards (War Metals).")
 add("bowden", name="Kye Bowden (+ wife)", company="KB Electric", rep="David Harbin", role="Cabin 4",
     email="kye@kbelectricllc.net", website="https://kbelectric.online",
     linkedin="https://www.linkedin.com/in/kye-bowden-506365185/", overnight=True, client=True, badge="CONFIRMED",
@@ -107,8 +107,8 @@ add("brock", name="Marc Brockhaus", company="Dunlap Codding", rep="David Harbin"
     note="Legacy overnight group (David's guest); Dunlap Codding IP law firm, OKC.")
 add("dbaker", name="Dean Baker", company="Midtown Construction", rep="Elijah Lee", role="Cabin 1 (w/ Scott Munday)",
     overnight=True, badge="CONFIRMED", note="Came with GES/Scott Munday; construction = core ICP. Confirm exact firm/role.")
-add("msmith", name="Matt Smith", company="Company TBD (reps another firm)", rep="Troy Williams", role="Cabin 5 (w/ Phil Hoey)",
-    overnight=True, badge="CONFIRMED", note="Phil Hoey's +1 but represents a DIFFERENT company - not in Asana/Evite. Get company + email from Hoey/inviter.")
+add("msmith", name="Wayne Richards", company="War Metals", rep="Troy Williams", role="Cabin 5 (w/ Phil Hoey)",
+    overnight=True, badge="CONFIRMED", note="Phil Hoey's guest - replaced Matt Smith (can no longer attend). War Metals.")
 add("stanton", name="Ed Stanton", company="Company TBD (FNBT guest)", rep="Stephen Mitchell", role="Cabin 3 (w/ John Gorton)",
     overnight=True, badge="CONFIRMED", note="John Gorton's (FNBT) overnight guest - fills Cabin 3 Room 2. Company not yet identified; ask John/Anna.")
 add("wilkerson", name="Brad Wilkerson", company="Guest of FNBT (John Gorton)", rep="Stephen Mitchell",
@@ -157,6 +157,12 @@ add("alvin", name="Alvin Myers (+ Kevin King)", company="United Systems", rep="G
     linkedin="https://www.linkedin.com/in/alvin-myers-43b521/",
     photo="https://www.datocms-assets.com/147131/1751992727-alvin-myers.jpeg",
     badge="CONFIRMED", note="Just confirmed on the Evite (2 guests).")
+add("kking", name="Kevin King", company="United Systems", rep="Stephen Mitchell",
+    team="2", email="kking@unitedsystemsok.com", phone="(405) 365-6458", website="https://unitedsystemsok.com",
+    badge="CONFIRMED", note="United Systems lead now that Alvin Myers had to drop (funeral + wife's knee surgery). Kevin is at registration; bringing Josh Parrish.")
+add("joshp", name="Josh Parrish", company="United Systems", rep="Stephen Mitchell",
+    team="2", email="kking@unitedsystemsok.com", badge="CONFIRMED",
+    note="New United Systems attendee, here with Kevin King. Registration email being sent (use Kevin's email until Josh's is captured).")
 add("doug", name="Doug Benson", company="Beene Services", rep="Lane McPherson", role="Lane shoots here",
     team="2", email="dbenson@beene.cc", phone="918-451-9081", website="https://beene.cc",
     linkedin="https://www.linkedin.com/in/doug-benson-18a3b43a/", badge="CONFIRMED", note="Lane's connection; Troy meeting Wed.")
@@ -254,7 +260,7 @@ add("hazen", name="Julie Hazen", company="A&A Trucking", rep="Troy Williams",
 
 OVERNIGHT_KEYS=["munday","walls","eddy","gorton","stanton","hoey","chaney","miller","brock","dbaker","msmith"]
 
-CONFIRMED_KEYS=["munday","redsch","walls","eddy","kirk","carter","avery","pfeil","miranda","priddy","erik","tj","alvin",
+CONFIRMED_KEYS=["munday","redsch","walls","eddy","kirk","carter","avery","pfeil","miranda","priddy","erik","tj","kking","joshp",
  "brad","doug","gorton","horgan","urbanc","boyd","chaney","ortiz","hoey","colt","miller","brock",
  "denny","garrett","strider","robber","bradford","ward","zamora","dbaker","msmith",
  "stanton","wilkerson","bethea"]
@@ -319,7 +325,7 @@ FITSCORE={
  "munday":5,"redsch":5,"walls":5,"kirk":4,"carter":4,"avery":3,"pfeil":2,"miranda":2,"priddy":3,
  "erik":4,"tj":4,"brad":4,"alvin":4,"doug":4,"denny":5,"garrett":5,"gorton":5,"horgan":4,"urbanc":2,
  "boyd":2,"strider":2,"zamora":2,"ward":2,"bradford":3,"robber":3,"colt":4,"miller":3,"brock":3,
- "chaney":5,"ortiz":5,"hoey":5,"dbaker":4,"msmith":3,"stanton":3,"wilkerson":3,"bethea":3,"eddy":4,
+ "chaney":5,"ortiz":5,"hoey":5,"dbaker":4,"msmith":4,"stanton":3,"wilkerson":3,"bethea":3,"eddy":4,"kking":4,"joshp":3,
  "toms":4,"hayden":4,"morrow":4,"sean":5,"kates":4,"cook":5,"buster":4,"page":4,"jessup":4,
  "amilian":4,"tara":4,"tamara":3,"lisa":4,"barnes":5,"oquinn":4,"moore":2,"hazen":3,
 }
@@ -362,7 +368,7 @@ ENRICH={
            "note":"Owner/CEO, Timber Wolf Excavating (Broken Arrow). Name shows as 'Jackson Jessop' in tracker, 'Jason Jessup' on the teams sheet - confirm."},
  "ward":{"note":"Company still unknown. Best lead: 'Gary Ward & Son Excavation' (OK excavation) - UNVERIFIED. Confirm with inviter."},
  "zamora":{"note":"Company still unknown; no confident OK match found. Confirm with inviter who brought him. Michael & Mitchell fill the squad."},
- "msmith":{"note":"Phil Hoey's +1; represents a DIFFERENT firm (not Hoey) - company still not in Asana/Evite/teams sheet. Get it from Phil Hoey. On Hoey's team (Phil, Matt Smith, Colt Hunter, David)."},
+ "msmith":{"note":"Phil Hoey's guest, replacing Matt Smith (can no longer attend). Wayne Richards of War Metals - get email/phone from Phil Hoey. On Hoey's team (Phil, Wayne, Colt Hunter, David)."},
  "lisa":{"note":"Tulsa office tech / managed IT (Preferred Business Systems; owner Mike Wolfinbarger). Last name not yet found - confirm."},
  "robberson_dummy":{},
 }
@@ -436,7 +442,7 @@ CABINS_HTML='''
  <div class="card"><div class="nm">Cabin 2 - Echo Contracting</div><div class="meta" style="margin-top:6px">Room 1: <b>Kevin Walls</b><br>Room 2: <b>Eddy</b></div></div>
  <div class="card"><div class="nm">Cabin 3 - FNBT</div><div class="meta" style="margin-top:6px">Room 1: <b>John Gorton</b><br>Room 2: <b>Ed Stanton</b> (FNBT guest)</div></div>
  <div class="card"><div class="nm">Cabin 4 - Legacy &amp; Succession</div><div class="meta" style="margin-top:6px">Room 1: <b>David Chaney</b><br>Room 2: <b>Chris Miller</b> (One Atlanta Tax Solutions)</div></div>
- <div class="card"><div class="nm">Cabin 5 - Hoey Construction</div><div class="meta" style="margin-top:6px">Room 1: <b>Phil Hoey</b><br>Room 2: <b>Matt Smith</b></div></div>
+ <div class="card"><div class="nm">Cabin 5 - Hoey Construction</div><div class="meta" style="margin-top:6px">Room 1: <b>Phil Hoey</b><br>Room 2: <b>Wayne Richards</b> (War Metals)</div></div>
  <div class="card"><div class="nm">Main Cabin (dinner venue; 3 rooms)</div><div class="meta" style="margin-top:6px">Room 1: <b>Marc Brockhaus</b> (Dunlap Codding)<br>Room 2: open<br>Room 3: open</div></div>
 </div>
 '''
@@ -481,6 +487,7 @@ RUNOFSHOW_HTML='''
 <li>4:30&ndash;5:00 PM &mdash; guest cabin check-in.</li>
 <li>6:30 PM &mdash; dinner at the Lodge (Steak &amp; Salmon); each host sits with their prospects.</li>
 <li>8:00 PM &mdash; bourbon tasting / cocktail hour (Hoey's bourbon; Troy picks up).</li>
+<li><b>Tell every overnight guest Thursday night:</b> cabin check-out is <b>10:00 AM Friday</b> &mdash; have all belongings out of the cabins before heading over to the shoot.</li>
 <li><i>Open:</i> Big Gun / six-stand experience &mdash; confirm with Stacey whether it's on for 2026 and the time.</li>
 </ul></div>
 <div class="rosblock"><h3>Friday, June 26 &mdash; event day</h3><ul class="roslist">
