@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import html, hashlib, sys
+import html, hashlib, sys, json
 IMG_MODE = ('--photos' in sys.argv)   # standalone version embeds real <img> headshots (renders outside the sandbox)
 
 REPCOLOR = {
@@ -599,6 +599,126 @@ _OLD_ROS='''
 </ul></div>
 '''
 
+TEAMS_SEED={"courses":[
+ {"name":"South Course A","teams":[
+  {"t":"Team 1A - South (1) - TerraStar","m":["Brad Wittrock","Tiffany Jones","Team Member 3","Team Member 4"]},
+  {"t":"Team 2A - South (2) - Summit Technology Group","m":["David Carter","Team Member 2","Team Member 3","Justin Culbertson (Harbinger)"]},
+  {"t":"Team 3A - South (3) - Echo Contracting","m":["Kevin Walls","Eddy","Jordan Hayes","Steve Holloway"]},
+  {"t":"Team 4A - South (4) - K&C Manufacturing","m":["Kirk Brown","Team Member 2","Elijah Lee (Harbinger)","Shawn Priddy"]},
+  {"t":"Team 5A - South (5) - ORCA","m":["Avery Smith","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 6A - South (6) - Kodiak Gas Services","m":["Joshua Pfeil","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 7A - South (7) - Dolese Bros.","m":["Derick Miranda","Team Member 2","Team Member 3","Team Member 4 (child)"]},
+  {"t":"Team 8A - South (8) - B&H Construction / GES","m":["Scott Munday","Dean Sutterfield","Dean Baker","Jim Bowers"]},
+  {"t":"Team 9A - South (9) - B&H Construction (Team 2)","m":["Red Schulze","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 10A - South (10) - Cultural Discipline","m":["Shawn Priddy","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 11A - South (11) - Air Technologies","m":["Erik Van Winkle","TJ Green","Team Member 3","Team Member 4"]},
+  {"t":"Team 12A - South (12) - The Phoenix Group","m":["Denny Hight","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 13A - South (13) - The Phoenix Group (Team 2)","m":["Garrett Hight","Justin Adams","Clay Fitzgerald","Gage Wall"]},
+  {"t":"Team 14A - South (14) - B&H Construction / GES (Team 2)","m":["Team Member 1","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 15A - South (15) - (INSERT COMPANY NAME)","m":[]},
+ ]},
+ {"name":"North Course A","teams":[
+  {"t":"Team 1A - North (1) - Company TBD","m":["Anthony Zamora","Team Member 2","Michael Pollard (Harbinger)","Mitchell Attaway (Harbinger)"]},
+  {"t":"Team 2A - North (2) - Legacy & Succession","m":["David Chaney","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 3A - North (3) - Legacy & Succession (Team 2)","m":["David Ortiz","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 4A - North (4) - Bending Steel (verify company)","m":["Jeremy Bradford","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 5A - North (5) - Midwest Wrecking","m":["Team Member 1","Team Member 2","Team Member 3","Lane McPherson (Harbinger)"]},
+  {"t":"Team 6A - North (6) - Hoey Construction / Southern Lifting","m":["Philip Hoey","Wayne Richards (War Metals)","Colt Hunter (Southern Lifting)","David Harbin (Harbinger)"]},
+  {"t":"Team 7A - North (7) - Twisted Oak","m":["Mike Robberson","Scott Stedman","Scott Lemming","Matt Johnson"]},
+  {"t":"Team 8A - North (8) - United Systems","m":["Kevin King","Josh Parrish","Graham Turner (Harbinger)","Parrish Walton (Harbinger)"]},
+  {"t":"Team 9A - North (9) - Company TBD","m":["Gary Ward","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 10A - North (10) - FNBT / JPMorgan","m":["John Gorton (FNBT)","Team Member 2","Team Member 3","Stephen Mitchell (Harbinger)"]},
+  {"t":"Team 11A - North (11) - MidCentral Energy","m":["Joe Horgan","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 12A - North (12) - Jimmie Dean Foundation","m":["Robert Boyd","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 13A - North (13) - KLX Energy (verify company)","m":["Allen Strider","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 14A - North (14) - (INSERT COMPANY NAME)","m":[]},
+  {"t":"Team 15A - North (15) - (INSERT COMPANY NAME)","m":[]},
+ ]},
+ {"name":"South Course B","teams":[{"t":"Team "+str(_n)+" - South ("+str(_n-15)+") - (INSERT COMPANY NAME)","m":[]} for _n in range(16,31)]},
+ {"name":"North Course B","teams":[{"t":"Team "+str(_n)+" - North ("+str(_n-15)+") - (INSERT COMPANY NAME)","m":[]} for _n in range(16,31)]},
+]}
+
+TEAMS_HTML=('''
+<div class="banner"><b>Shoot Team Assignments</b> &mdash; drag a person between teams, click any name or team title to edit it, and use <b>+ person</b> / <b>+ Add team</b> to grow a course. Edits save automatically and sync to the team. <span id="teamstatus" class="twarn">Loading&hellip;</span></div>
+<div class="tbtns"><button class="tbtn" onclick="window.__teamsExport()">Export JSON</button> <button class="tbtn danger" onclick="window.__teamsReset()">Reset to defaults</button></div>
+<div id="teamsroot"></div>
+<style>
+.tbtns{margin:0 0 12px}
+.tbtn{font-size:12px;font-weight:700;border:1px solid #cfd6df;background:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;color:#1f3a5f;margin-right:6px}
+.tbtn.danger{color:#a23}
+#teamstatus{font-size:12px;font-weight:700;margin-left:6px}
+.tok{color:#1a7f4b}.twarn{color:#b06a00}
+.tcourse{margin-bottom:22px}
+.tcourse-h{font-size:14px;font-weight:800;color:#1f3a5f;background:#eef2f7;border:1px solid #dde4ec;border-radius:8px;padding:7px 12px;margin-bottom:10px}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:10px}
+.tcard{background:#fff;border:1px solid #e2e7ee;border-radius:10px;padding:10px;min-height:90px}
+.tcard.drop{border-color:#1f3a5f;box-shadow:0 0 0 2px rgba(31,58,95,.25)}
+.tt{font-weight:700;font-size:12.5px;color:#16202c;border-bottom:1px dashed #e2e7ee;padding-bottom:6px;margin-bottom:7px;outline:none}
+.tchip{display:flex;align-items:center;gap:6px;background:#f4f6f9;border:1px solid #e2e7ee;border-radius:7px;padding:4px 7px;margin-bottom:5px;cursor:grab}
+.tchip:active{cursor:grabbing}
+.tnm{flex:1;font-size:12.5px;color:#1d2733;outline:none}
+.tx{border:none;background:transparent;color:#b0808a;font-size:14px;line-height:1;cursor:pointer;padding:0 2px}
+.tadd{font-size:11px;font-weight:700;color:#1f6b6b;background:#eef6f6;border:1px dashed #bcd;border-radius:6px;padding:3px 8px;cursor:pointer;margin-top:3px}
+.tdel{display:block;margin-top:7px;font-size:10.5px;color:#a23;background:transparent;border:none;cursor:pointer}
+.taddteam{margin-top:10px;font-size:12px;font-weight:700;color:#1f3a5f;background:#fff;border:1px dashed #9bb;border-radius:8px;padding:6px 12px;cursor:pointer}
+</style>
+'''
++ '<script>window.__TEAMSEED=' + json.dumps(TEAMS_SEED) + ';</script>'
++ '''<script>
+(function(){
+ var KEY="cedargate_teams_v1"; var seed=window.__TEAMSEED;
+ var STATE=null, saveTimer=null, lastServer=0, editing=false;
+ function loadLocal(){try{var s=localStorage.getItem(KEY);if(s)return JSON.parse(s);}catch(e){}return null;}
+ function persistLocal(){try{localStorage.setItem(KEY,JSON.stringify(STATE));}catch(e){}}
+ function setStatus(t,cls){var el=document.getElementById("teamstatus");if(el){el.textContent=t;el.className=cls||"";}}
+ function serverLoad(cb){fetch("/api/teams",{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).then(function(d){cb(d&&d.courses?d:null);}).catch(function(){cb(null);});}
+ function serverSave(){STATE.updated=Date.now();fetch("/api/teams",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(STATE)}).then(function(r){if(r.ok){lastServer=STATE.updated;setStatus("Saved & synced ✓","tok");}else{setStatus("Saved on this device (team sync not connected)","twarn");}}).catch(function(){setStatus("Saved on this device (team sync not connected)","twarn");});}
+ function save(){persistLocal();setStatus("Saving…","");clearTimeout(saveTimer);saveTimer=setTimeout(serverSave,600);}
+ function render(){
+  var root=document.getElementById("teamsroot");if(!root)return;root.innerHTML="";
+  STATE.courses.forEach(function(course,ci){
+   var sec=document.createElement("div");sec.className="tcourse";
+   var h=document.createElement("div");h.className="tcourse-h";h.textContent=course.name;sec.appendChild(h);
+   var grid=document.createElement("div");grid.className="tgrid";
+   course.teams.forEach(function(team,ti){
+    var card=document.createElement("div");card.className="tcard";
+    card.addEventListener("dragover",function(e){e.preventDefault();card.classList.add("drop");});
+    card.addEventListener("dragleave",function(){card.classList.remove("drop");});
+    card.addEventListener("drop",function(e){e.preventDefault();card.classList.remove("drop");onDrop(e,ci,ti);});
+    var tt=document.createElement("div");tt.className="tt";tt.contentEditable=true;tt.textContent=team.t;
+    tt.addEventListener("focus",function(){editing=true;});tt.addEventListener("blur",function(){editing=false;team.t=tt.textContent.trim();save();});
+    card.appendChild(tt);
+    team.m.forEach(function(name,mi){
+     var chip=document.createElement("div");chip.className="tchip";chip.draggable=true;
+     chip.addEventListener("dragstart",function(e){e.dataTransfer.setData("text/plain",ci+","+ti+","+mi);e.dataTransfer.effectAllowed="move";});
+     var span=document.createElement("span");span.className="tnm";span.contentEditable=true;span.textContent=name;
+     span.addEventListener("focus",function(){editing=true;});span.addEventListener("blur",function(){editing=false;team.m[mi]=span.textContent.trim();save();});
+     var del=document.createElement("button");del.className="tx";del.textContent="×";del.title="Remove";
+     del.addEventListener("click",function(){team.m.splice(mi,1);save();render();});
+     chip.appendChild(span);chip.appendChild(del);card.appendChild(chip);
+    });
+    var add=document.createElement("button");add.className="tadd";add.textContent="+ person";
+    add.addEventListener("click",function(){team.m.push("New person");save();render();});
+    card.appendChild(add);
+    var delT=document.createElement("button");delT.className="tdel";delT.textContent="Delete team";
+    delT.addEventListener("click",function(){if(confirm("Delete this team?")){course.teams.splice(ti,1);save();render();}});
+    card.appendChild(delT);
+    grid.appendChild(card);
+   });
+   var addT=document.createElement("button");addT.className="taddteam";addT.textContent="+ Add team";
+   addT.addEventListener("click",function(){course.teams.push({t:"New Team - (INSERT COMPANY NAME)",m:[]});save();render();});
+   sec.appendChild(grid);sec.appendChild(addT);root.appendChild(sec);
+  });
+ }
+ function onDrop(e,ci,ti){var d=e.dataTransfer.getData("text/plain");if(!d)return;var p=d.split(",").map(Number);var fc=p[0],ft=p[1],fm=p[2];if(fc===ci&&ft===ti)return;var nm=STATE.courses[fc].teams[ft].m[fm];if(nm===undefined)return;STATE.courses[fc].teams[ft].m.splice(fm,1);STATE.courses[ci].teams[ti].m.push(nm);save();render();}
+ function start(){serverLoad(function(server){var local=loadLocal();if(server){STATE=server;lastServer=server.updated||0;setStatus("Synced with team ✓","tok");}else if(local&&local.courses){STATE=local;setStatus("Saved on this device (team sync not connected)","twarn");}else{STATE=JSON.parse(JSON.stringify(seed));STATE.updated=0;setStatus("Showing defaults","twarn");}render();setInterval(poll,15000);});}
+ function poll(){if(editing)return;serverLoad(function(server){if(server&&(server.updated||0)>lastServer){STATE=server;lastServer=server.updated;render();setStatus("Updated from team ✓","tok");}});}
+ window.__teamsExport=function(){var blob=new Blob([JSON.stringify(STATE,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cedar-gate-teams.json";a.click();};
+ window.__teamsReset=function(){if(confirm("Reset to the original seeded teams? This clears edits.")){STATE=JSON.parse(JSON.stringify(seed));STATE.updated=Date.now();save();render();}};
+ if(document.readyState!=="loading")start();else document.addEventListener("DOMContentLoaded",start);
+})();
+</script>''')
+
 HTML=f'''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Cedar Gate Connection Cheat Sheet</title>
@@ -657,6 +777,7 @@ h1{{font-size:22px;margin:0 0 2px;color:#1f3a5f}}
  <div class="tab" onclick="show('sh',this)">Shoot Day - Friday</div>
  <div class="tab" onclick="show('ros',this)">Run of Show</div>
  <div class="tab" onclick="show('cab',this)">Cabins</div>
+ <div class="tab" onclick="show('teams',this)">Shoot Teams</div>
 </div>
 
 <div id="ov" class="page active">
@@ -674,6 +795,7 @@ h1{{font-size:22px;margin:0 0 2px;color:#1f3a5f}}
 
 <div id="ros" class="page">{RUNOFSHOW_HTML}</div>
 <div id="cab" class="page">{CABINS_HTML}</div>
+<div id="teams" class="page">{TEAMS_HTML}</div>
 
 <div class="foot">Counts verified against the live Evite (Yes = 96) on Jun 19, 2026. Links double-verified. Photos link out to public sources (sandbox can't embed images inline).</div>
 </div>
