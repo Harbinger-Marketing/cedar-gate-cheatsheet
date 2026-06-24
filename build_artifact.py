@@ -258,7 +258,7 @@ CONFIRMED_KEYS=["munday","redsch","walls","eddy","kirk","carter","avery","pfeil"
  "brad","doug","gorton","horgan","urbanc","boyd","chaney","ortiz","hoey","colt","miller","brock",
  "denny","garrett","strider","robber","bradford","ward","zamora","dbaker","msmith",
  "stanton","wilkerson","bethea"]
-UNCONF_KEYS=["toms","morrow","kates","buster","page","jessup"]
+UNCONF_KEYS=["morrow","buster","page"]
 
 REP_ORDER=["Current Partner","Elijah Lee","Stephen Mitchell","Troy Williams","David Harbin","Lane McPherson","Graham Turner"]
 
@@ -464,7 +464,7 @@ RUNOFSHOW_HTML='''
 </ul></div>
 <div class="rosblock"><h3>Roles at a glance</h3><ul class="roslist">
 <li><b>David Harbin</b> &mdash; host presence; 20-min lunch presentation.</li>
-<li><b>Elijah Lee</b> &mdash; setup table with Michael (QR codes, booth, shotgun, signage); partner/prospect host; gives the Harbinger story talk at lunch (from his GUCA outline; highlight the new OKC location).</li>
+<li><b>Elijah Lee</b> &mdash; setup table with Michael (QR codes, booth, shotgun, signage); partner/prospect host; opens lunch with a prayer.</li>
 <li><b>Michael Pollard</b> &mdash; logistics lead / event quarterback; setup table; raffle app + kiosk; runs the day; cues the timed discovery email.</li>
 <li><b>Mitchell Attaway</b> &mdash; registration + lunch material setup; owns the registration + raffle kiosk station.</li>
 <li><b>Stephen Mitchell</b> &mdash; cabin gift placement (with Parrish); raffle winner announcement + hype; thanks guests at the end.</li>
@@ -488,9 +488,10 @@ RUNOFSHOW_HTML='''
 <li><b>8:30 AM &mdash; registration + breakfast</b> (Cedar Gate Wrap). <b>Combined station (Mitchell owns):</b> fill out the raffle entry on the iPad &rarr; write a handwritten name tag (NAME + COMPANY) &rarr; breakfast. This funnels every walk-on teammate through the iPad so we capture their contact info &mdash; frame it as the entry to win the Benelli. Hosts greet and find their guests; Michael floats; Chris captures.</li>
 <li>9:45 AM &mdash; safety training (Cedar Gate staff).</li>
 <li><b>10:00 AM &mdash; clay shoot</b> (one course reserved, ~70 shooters; hosts shoot alongside their prospects). Right after: Michael/Mitchell export the raffle CSV from /admin to build the discovery list before lunch.</li>
-<li><b>12:00 PM &mdash; lunch (The Chop) + presentations.</b> Elijah: Harbinger story talk (highlight the new OKC location). David: 20-min talk &mdash; (1) make your business look as credible as it actually is; (2) what it costs to get a new customer and how to scale it; (3) how to get in front of your best future employees. Close: David invites everyone to book a 10-min discovery call via the table QR.</li>
-<li><b>TIMED SEND</b> &mdash; as David closes, Michael cues Luke, who fires the discovery email (Mailchimp) to all Evite registrants + raffle entrants. Goal: phones buzz in the room.</li>
-<li><b>Raffle draw</b> &mdash; Stephen announces/hypes; use the admin DRAW WINNER button (iPad on a screen if possible). Winner does NOT take the gun on-site &mdash; visits the FFL dealer, completes ATF Form 4473, presents photo ID, passes a NICS check. If they fail, use Redraw for a backup. Capture winner info for the FFL handoff.</li>
+<li><b>12:00 PM &mdash; lunch (The Chop).</b> Elijah Lee opens with a prayer before everyone eats; hosts sit with their guests.</li>
+<li><b>Raffle draw</b> (right after lunch) &mdash; Stephen announces/hypes; use the admin DRAW WINNER button (iPad on a screen if possible). Winner does NOT take the gun on-site &mdash; visits the FFL dealer, completes ATF Form 4473, presents photo ID, passes a NICS check. If they fail, use Redraw for a backup. Capture winner info for the FFL handoff.</li>
+<li><b>David's presentation</b> (20 min, after the raffle) &mdash; (1) make your business look as credible as it actually is; (2) what it costs to get a new customer and how to scale it; (3) how to get in front of your best future employees. Close: David invites everyone to book a 10-min discovery call via the table QR.</li>
+<li><b>TIMED SEND</b> &mdash; right as David closes, Michael cues Luke, who fires the discovery email (Mailchimp) to all Evite registrants + raffle entrants. Goal: phones buzz in the room.</li>
 <li><b>Wrap</b> &mdash; Stephen thanks guests; hosts lock next steps (book the discovery call on the spot); teardown; export the final raffle CSV before leaving.</li>
 <li><b>Return</b> &mdash; Thursday-flight group &rarr; OKC airport, return rentals, fly ATL (Fri evening &mdash; CONFIRM time). Troy/Elijah/David handle their own return.</li>
 </ul></div>
