@@ -616,7 +616,7 @@ TEAMS_SEED={"courses":[
   {"t":"Team 8A - South (8) - B&H Construction / GES","m":["Scott Munday","Dean Sutterfield","Dean Baker","Jim Bowers"]},
   {"t":"Team 9A - South (9) - B&H Construction (Team 2)","m":["Red Schulze","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 10A - South (10) - Cultural Discipline","m":["Shawn Priddy","Team Member 2","Team Member 3","Team Member 4"]},
-  {"t":"Team 11A - South (11) - Air Technologies","m":["Erik Van Winkle","TJ Green","Team Member 3","Team Member 4"]},
+  {"t":"Team 11A - South (11) - Air Technologies","m":["Erik Van Winkle","TJ Green","Team Member 3","Parrish Walton (Harbinger)"]},
   {"t":"Team 12A - South (12) - The Phoenix Group","m":["Denny Hight","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 13A - South (13) - The Phoenix Group (Team 2)","m":["Garrett Hight","Justin Adams","Clay Fitzgerald","Gage Wall"]},
   {"t":"Team 14A - South (14) - B&H Construction / GES (Team 2)","m":["Team Member 1","Team Member 2","Team Member 3","Team Member 4"]},
@@ -627,16 +627,16 @@ TEAMS_SEED={"courses":[
   {"t":"Team 2A - North (2) - Legacy & Succession","m":["David Chaney","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 3A - North (3) - Legacy & Succession (Team 2)","m":["David Ortiz","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 4A - North (4) - Bending Steel (verify company)","m":["Jeremy Bradford","Team Member 2","Team Member 3","Team Member 4"]},
-  {"t":"Team 5A - North (5) - (INSERT COMPANY NAME)","m":["Team Member 1","Team Member 2","Team Member 3","Lane McPherson (Harbinger)"]},
+  {"t":"Team 5A - North (5) - Midwest Wrecking","m":["Team Member 1","Team Member 2","Team Member 3","Lane McPherson (Harbinger)"]},
   {"t":"Team 6A - North (6) - Hoey Construction / Southern Lifting","m":["Philip Hoey","Wayne Richards (War Metals)","Colt Hunter (Southern Lifting)","David Harbin (Harbinger)"]},
   {"t":"Team 7A - North (7) - Twisted Oak","m":["Mike Robberson","Scott Stedman","Scott Lemming","Matt Johnson"]},
-  {"t":"Team 8A - North (8) - United Systems","m":["Kevin King","Josh Parrish","Graham Turner (Harbinger)","Parrish Walton (Harbinger)"]},
+  {"t":"Team 8A - North (8) - United Systems","m":["Kevin King","Josh Parrish","Team Member 3","Graham Turner (Harbinger)"]},
   {"t":"Team 9A - North (9) - Company TBD","m":["Gary Ward","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 10A - North (10) - FNBT / JPMorgan","m":["John Gorton (FNBT)","Team Member 2","Team Member 3","Stephen Mitchell (Harbinger)"]},
   {"t":"Team 11A - North (11) - MidCentral Energy","m":["Joe Horgan","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 12A - North (12) - Jimmie Dean Foundation","m":["Robert Boyd","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 13A - North (13) - KLX Energy (verify company)","m":["Allen Strider","Team Member 2","Team Member 3","Team Member 4"]},
-  {"t":"Team 14A - North (14) - (INSERT COMPANY NAME)","m":[]},
+  {"t":"Team 14A - North (14) - B&H Construction / GES Team","m":["Chris Drake (GES)","Bobby Jones (GES)","Tyler Beller (APS / Air Products Supply)","Richard Starks (Prairie Rock Architecture)"]},
   {"t":"Team 15A - North (15) - (INSERT COMPANY NAME)","m":[]},
  ]},
  {"name":"South Course B","teams":[
@@ -644,7 +644,13 @@ TEAMS_SEED={"courses":[
   {"t":"Team 17 - South (2) - The Beckman Company","m":["Layne Page","Team Member 2","Team Member 3"]},
   {"t":"Team 18 - South (3) - Coreslab Structures","m":["Daniel Morrow","Team Member 2","Team Member 3"]},
  ]},
- {"name":"North Course B","teams":[{"t":"Team "+str(_n)+" - North ("+str(_n-15)+") - (INSERT COMPANY NAME)","m":[]} for _n in range(16,31)]},
+ {"name":"North Course B","teams":[
+  {"t":"Team 16 - North (1) - Bostick Services","m":["Matthew Toms","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 17 - North (2) - Harbor Insurance","m":["Hayden McCalman","Team Member 2","Team Member 3"]},
+  {"t":"Team 18 - North (3) - Sean U. Cooper Construction","m":["Sean Cooper","Team Member 2","Team Member 3"]},
+  {"t":"Team 19 - North (4) - Reroof America","m":["Collin Cook","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 20 - North (5) - Timberwolf Excavating","m":["Jason Jessup","Team Member 2","Team Member 3"]},
+ ]},
 ]}
 
 TEAMS_HTML=('''
