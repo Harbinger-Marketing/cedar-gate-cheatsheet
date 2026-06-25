@@ -436,7 +436,7 @@ shoot_conf_html=render_groups(CONFIRMED_KEYS)
 shoot_unc_html=render_groups(UNCONF_KEYS)
 
 CABINS_HTML='''
-<div class="banner">Thursday-night guest cabins (per Troy's Sleeping Arrangements task). <b>KB Electric removed - no longer attending.</b> Harbinger team lodging is a separate hotel booking.</div>
+<div class="banner">Thursday-night guest cabins (per Troy's Sleeping Arrangements task). <b>KB Electric removed - no longer attending.</b> Harbinger team lodging is listed below.</div>
 <div class="grid">
  <div class="card"><div class="nm">Cabin 1 - GES</div><div class="meta" style="margin-top:6px">Room 1: <b>Scott Munday</b> (GES)<br>Room 2: <b>Dean Baker</b> (Midtown Construction)</div></div>
  <div class="card"><div class="nm">Cabin 2 - Echo Contracting</div><div class="meta" style="margin-top:6px">Room 1: <b>Kevin Walls</b><br>Room 2: <b>Eddy</b></div></div>
@@ -444,6 +444,11 @@ CABINS_HTML='''
  <div class="card"><div class="nm">Cabin 4 - Legacy &amp; Succession</div><div class="meta" style="margin-top:6px">Room 1: <b>David Chaney</b><br>Room 2: <b>Chris Miller</b> (One Atlanta Tax Solutions)</div></div>
  <div class="card"><div class="nm">Cabin 5 - Hoey Construction</div><div class="meta" style="margin-top:6px">Room 1: <b>Phil Hoey</b><br>Room 2: <b>Wayne Richards</b> (War Metals)</div></div>
  <div class="card"><div class="nm">Main Cabin (dinner venue; 3 rooms)</div><div class="meta" style="margin-top:6px">Room 1: <b>Marc Brockhaus</b> (Dunlap Codding)<br>Room 2: open<br>Room 3: open</div></div>
+</div>
+<div class="banner" style="margin-top:18px"><b>Harbinger team lodging</b></div>
+<div class="grid">
+ <div class="card"><div class="nm">Holiday Inn Express &amp; Suites Kingfisher</div><div class="meta" style="margin-top:6px">1708 South Main St &middot; ~10-15 min from venue &middot; booked under Troy's name (conf# H17638901 / H17638907)</div><div class="meta" style="margin-top:8px">Troy Williams<br>Lane McPherson<br>Graham Turner<br>Stephen Mitchell<br>Parrish Walton<br>Justin Culbertson</div></div>
+ <div class="card"><div class="nm">The Loft (on-site at Cedar Gate)</div><div class="meta" style="margin-top:6px">2 queen + 3 twin beds &middot; sleeps 5</div><div class="meta" style="margin-top:8px">Michael Pollard<br>David Harbin<br>Elijah Lee<br>Mitchell Attaway<br>Chris Scott</div></div>
 </div>
 '''
 
@@ -615,14 +620,14 @@ TEAMS_SEED={"courses":[
   {"t":"Team 12A - South (12) - The Phoenix Group","m":["Denny Hight","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 13A - South (13) - The Phoenix Group (Team 2)","m":["Garrett Hight","Justin Adams","Clay Fitzgerald","Gage Wall"]},
   {"t":"Team 14A - South (14) - B&H Construction / GES (Team 2)","m":["Team Member 1","Team Member 2","Team Member 3","Team Member 4"]},
-  {"t":"Team 15A - South (15) - (INSERT COMPANY NAME)","m":[]},
+  {"t":"Team 15A - South (15) - (INSERT COMPANY NAME)","m":["Patrick Christen","Team Member 2","Dexter Brown","Mitchell Attaway (Harbinger)"]},
  ]},
  {"name":"North Course A","teams":[
-  {"t":"Team 1A - North (1) - Company TBD","m":["Anthony Zamora","Team Member 2","Michael Pollard (Harbinger)","Mitchell Attaway (Harbinger)"]},
+  {"t":"Team 1A - North (1) - Company TBD","m":["Anthony Zamora","Team Member 2","Michael Pollard (Harbinger)","Team Member 4"]},
   {"t":"Team 2A - North (2) - Legacy & Succession","m":["David Chaney","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 3A - North (3) - Legacy & Succession (Team 2)","m":["David Ortiz","Team Member 2","Team Member 3","Team Member 4"]},
   {"t":"Team 4A - North (4) - Bending Steel (verify company)","m":["Jeremy Bradford","Team Member 2","Team Member 3","Team Member 4"]},
-  {"t":"Team 5A - North (5) - Midwest Wrecking","m":["Team Member 1","Team Member 2","Team Member 3","Lane McPherson (Harbinger)"]},
+  {"t":"Team 5A - North (5) - (INSERT COMPANY NAME)","m":["Team Member 1","Team Member 2","Team Member 3","Lane McPherson (Harbinger)"]},
   {"t":"Team 6A - North (6) - Hoey Construction / Southern Lifting","m":["Philip Hoey","Wayne Richards (War Metals)","Colt Hunter (Southern Lifting)","David Harbin (Harbinger)"]},
   {"t":"Team 7A - North (7) - Twisted Oak","m":["Mike Robberson","Scott Stedman","Scott Lemming","Matt Johnson"]},
   {"t":"Team 8A - North (8) - United Systems","m":["Kevin King","Josh Parrish","Graham Turner (Harbinger)","Parrish Walton (Harbinger)"]},
@@ -634,7 +639,11 @@ TEAMS_SEED={"courses":[
   {"t":"Team 14A - North (14) - (INSERT COMPANY NAME)","m":[]},
   {"t":"Team 15A - North (15) - (INSERT COMPANY NAME)","m":[]},
  ]},
- {"name":"South Course B","teams":[{"t":"Team "+str(_n)+" - South ("+str(_n-15)+") - (INSERT COMPANY NAME)","m":[]} for _n in range(16,31)]},
+ {"name":"South Course B","teams":[
+  {"t":"Team 16 - South (1) - Paladin Land Group","m":["Buster Bradshaw","Team Member 2","Team Member 3","Team Member 4"]},
+  {"t":"Team 17 - South (2) - The Beckman Company","m":["Layne Page","Team Member 2","Team Member 3"]},
+  {"t":"Team 18 - South (3) - Coreslab Structures","m":["Daniel Morrow","Team Member 2","Team Member 3"]},
+ ]},
  {"name":"North Course B","teams":[{"t":"Team "+str(_n)+" - North ("+str(_n-15)+") - (INSERT COMPANY NAME)","m":[]} for _n in range(16,31)]},
 ]}
 
